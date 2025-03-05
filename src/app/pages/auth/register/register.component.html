@@ -1,0 +1,89 @@
+<main
+  class="flex flex-col space-y-4 justify-center items-center h-[calc(100vh-4rem)] text-primary-900"
+>
+  <div>
+    <!-- <p>logo</p> -->
+    <h3 class="font-medium text-lg">Sign Up</h3>
+  </div>
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="onRegister()"
+    class="bg-primary-100 w-1/2 lg:w-1/3 space-y-2 p-5 rounded-md"
+  >
+    <div class="flex flex-col space-y-1">
+      <label for="name" class="">Name</label>
+      <input
+        type="text"
+        class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
+        id="name"
+        formControlName="name"
+        placeholder="Enter your name"
+      />
+      @if(name.invalid && (name.dirty || name.touched)){
+      <p class="text-xs text-red-500">Name is required</p>
+      }
+    </div>
+    <div class="flex flex-col space-y-1">
+      <label for="email" class="">Email</label>
+      <input
+        type="email"
+        class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
+        id="email"
+        formControlName="email"
+        placeholder="Enter your email"
+      />
+      @if(email.invalid && (email.dirty || email.touched)){
+      @if(email.hasError('required')){
+      <p class="text-xs text-red-500">Email is required</p>
+      } @else if(email.hasError('pattern')){
+      <p class="text-xs text-red-500">Email is invalid</p>
+      } }
+    </div>
+    <div class="flex flex-col space-y-1">
+      <label for="password" class="">Password</label>
+      <input
+        type="password"
+        class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
+        id="password"
+        formControlName="password"
+        placeholder="Enter your password"
+      />
+      @if(password.invalid && (password.dirty || password.touched)){
+      <p class="text-xs text-red-500">Password is required</p>
+      }
+    </div>
+    <div class="flex flex-col space-y-1">
+      <label for="confirmPassword" class="">Confirm Password</label>
+      <input
+        type="password"
+        class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        placeholder="Confirm your password"
+      />
+      @if(confirmPassword.invalid && (confirmPassword.dirty ||
+      confirmPassword.touched)){
+      <p class="text-xs text-red-500">Confirm Password is required</p>
+      } @if(registerForm.hasError('passwordMismatch') && password.valid &&
+      confirmPassword.valid) {
+      <p class="text-xs text-red-500">Passwords do not match</p>
+      }
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="registerForm.invalid"
+      class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full border border-primary-500 text-white font-medium"
+    >
+      Sign up
+    </button>
+    <p class="text-center text-primary-400">
+      Already have an account?
+      <a
+        routerLink="/login"
+        class="text-primary-900 font-medium hover:underline cursor-pointer"
+        >Log in</a
+      >
+    </p>
+  </form>
+</main>

@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --default-font-family: "Source Sans 3", sans-serif;
+  --color-primary-50: #fff2f2; /* Light */
+  --color-primary-100: #ffe5e5;
+  --color-primary-200: #fdab9e;
+  --color-primary-300: #a9b5df; /* Soft */
+  --color-primary-400: #96a2d3;
+  --color-primary-500: #7886c7; /* Medium */
+  --color-primary-600: #5f72b0;
+  --color-primary-700: #2d336b; /* Dark */
+  --color-primary-800: #1b1f39;
+  --color-primary-900: #121420;
+}
