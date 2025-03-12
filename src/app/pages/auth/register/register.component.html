@@ -19,7 +19,7 @@
         formControlName="name"
         placeholder="Enter your name"
       />
-      @if(name.invalid && (name.dirty || name.touched)){
+      @if(isInvalid('name')){
       <p class="text-xs text-red-500">Name is required</p>
       }
     </div>
@@ -32,10 +32,10 @@
         formControlName="email"
         placeholder="Enter your email"
       />
-      @if(email.invalid && (email.dirty || email.touched)){
-      @if(email.hasError('required')){
+      @if(isInvalid('email')){
+      @if(registerForm.get('email')?.hasError('required')){
       <p class="text-xs text-red-500">Email is required</p>
-      } @else if(email.hasError('pattern')){
+      } @else if(registerForm.get('email')?.hasError('email')){
       <p class="text-xs text-red-500">Email is invalid</p>
       } }
     </div>
@@ -48,9 +48,12 @@
         formControlName="password"
         placeholder="Enter your password"
       />
-      @if(password.invalid && (password.dirty || password.touched)){
+      @if(isInvalid('password')){
+      @if(registerForm.get('password')?.hasError('required')){
       <p class="text-xs text-red-500">Password is required</p>
-      }
+      } @else if(registerForm.get('password')?.hasError('minlength')){
+      <p class="text-xs text-red-500">Password must be at least 6 characters</p>
+      } }
     </div>
     <div class="flex flex-col space-y-1">
       <label for="confirmPassword" class="">Confirm Password</label>
@@ -61,11 +64,11 @@
         formControlName="confirmPassword"
         placeholder="Confirm your password"
       />
-      @if(confirmPassword.invalid && (confirmPassword.dirty ||
-      confirmPassword.touched)){
+      @if(isInvalid('confirmPassword')){
       <p class="text-xs text-red-500">Confirm Password is required</p>
-      } @if(registerForm.hasError('passwordMismatch') && password.valid &&
-      confirmPassword.valid) {
+      } @else if(registerForm.hasError('passwordMismatch') &&
+      registerForm.get('password')?.dirty &&
+      registerForm.get('confirmPassword')?.dirty ) {
       <p class="text-xs text-red-500">Passwords do not match</p>
       }
     </div>
