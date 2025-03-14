@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/security/auth.service';
 import { User } from '../../types/models/user';
 
@@ -12,6 +12,7 @@ import { User } from '../../types/models/user';
 })
 export class HeaderComponent {
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   user = signal<User | null>(null);
   role = computed(() => this.user()?.role);
@@ -27,7 +28,8 @@ export class HeaderComponent {
       next: (response) => {
         console.log(response.message);
         localStorage.removeItem('ACCESS_TOKEN');
-        this.user.set(null);
+        this.authService.setUser(null);
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         console.log(err);
