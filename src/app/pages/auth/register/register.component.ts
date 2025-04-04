@@ -46,7 +46,7 @@ export class RegisterComponent {
         this.router.navigate(['login']);
       },
       error: (err) => {
-        console.log(err);
+        console.log(err.message);
       },
     });
   }

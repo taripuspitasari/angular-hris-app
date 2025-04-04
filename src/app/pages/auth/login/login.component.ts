@@ -7,10 +7,13 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/security/auth.service';
+import { NotificationComponent } from '../../../components/notification/notification.component';
+import { NotificationService } from '../../../services/utils/notification.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NotificationComponent, AsyncPipe],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -18,6 +21,7 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private notif = inject(NotificationService);
 
   loginForm: FormGroup;
 
@@ -38,10 +42,12 @@ export class LoginComponent {
         localStorage.setItem('ACCESS_TOKEN', response.data?.token || '');
 
         this.authService.setUser(response.data || null);
+        this.notif.show('Welcome!', 'success');
         this.router.navigate(['dashboard']);
       },
       error: (err) => {
-        console.log(err);
+        console.log(err.message);
+        this.notif.show(err.message, 'error');
       },
     });
   }

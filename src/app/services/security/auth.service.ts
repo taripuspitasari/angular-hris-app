@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginRequest, RegisterRequest } from '../../types/request/auth';
 import { environment } from '../../../environments/environment';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { AuthResponse } from '../../types/api/auth';
+import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
+import { Auth } from '../../types/api/auth';
 import { User } from '../../types/models/user';
+import { handleError } from '../utils/errorHandler';
 
 @Injectable({
   providedIn: 'root',
@@ -15,30 +16,20 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  registerUser(data: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/users`, data);
+  registerUser(data: RegisterRequest): Observable<Auth> {
+    return this.http
+      .post<Auth>(`${environment.apiUrl}/users`, data)
+      .pipe(catchError(handleError));
   }
 
-  loginUser(data: LoginRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(
-      `${environment.apiUrl}/users/login`,
-      data
-    );
+  loginUser(data: LoginRequest): Observable<Auth> {
+    return this.http
+      .post<Auth>(`${environment.apiUrl}/users/login`, data)
+      .pipe(catchError(handleError));
   }
 
-  logoutUser(): Observable<AuthResponse> {
-    const token = localStorage.getItem('ACCESS_TOKEN');
-    if (!token) {
-      console.warn('Token is missing! User might be already logged out.');
-      return throwError(() => new Error('Token is missing'));
-    }
-
-    return this.http.delete<AuthResponse>(
-      `${environment.apiUrl}/users/current`,
-      {
-        headers: { 'X-API-TOKEN': token },
-      }
-    );
+  logoutUser(): Observable<Auth> {
+    return this.http.delete<Auth>(`${environment.apiUrl}/users/current`);
   }
 
   setUser(user: User | null) {

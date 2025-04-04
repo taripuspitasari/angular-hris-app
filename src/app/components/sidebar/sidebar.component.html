@@ -1,0 +1,120 @@
+<div class="bg-primary-600 w-44 min-h-[calc(100vh-4rem)] py-2">
+  @if(user()) {
+  <ul class="flex flex-col gap-2 justify-end px-3">
+    <li
+      class="hidden font-medium h-16 text-lg items-center justify-between p-1"
+    >
+      <div><p>PeopleZ</p></div>
+      <div
+        class="bg-primary-700 h-6 w-6 text-primary-600 flex items-center justify-center rounded-md"
+      >
+        <i class="fa-solid fa-angle-left text-xs"></i>
+      </div>
+    </li>
+    @if (role() === 'APPLICANT') {
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="jobs">Job Listings</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="applications">My Applications</a>
+    </li>
+    } @if (role() === 'EMPLOYEE') {
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/attendance">Attendance</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/leave">Leave Requests</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/payroll">Payslip</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/performance">Performance Review</a>
+    </li>
+    } @if (role() === 'HR') {
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/recruitment">Recruitment</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="employees">Employee Management</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/attendance">Attendance Reports</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/leave-approvals">Leave Approvals</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/performance-reviews">Performance Reviews</a>
+    </li>
+    } @if (role() === 'ADMIN') {
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/recruitment">Recruitment</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/employees">Manage Employees</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/attendance">Attendance Data</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/payroll">Payroll Management</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/leave-policy">Leave Policies</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/performance">Performance Reports</a>
+    </li>
+    <li
+      class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
+    >
+      <a routerLink="/user-management">User Roles</a>
+    </li>
+    }
+
+    <li>
+      <button
+        (click)="onLogout()"
+        class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded w-full text-left"
+      >
+        Log out
+      </button>
+    </li>
+  </ul>
+  }
+</div>

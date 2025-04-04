@@ -1,21 +1,27 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, computed, inject, signal } from '@angular/core';
 import { AuthService } from '../../services/security/auth.service';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Router, RouterLink } from '@angular/router';
+import { User } from '../../types/models/user';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-sidebar',
   imports: [RouterLink, CommonModule],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  templateUrl: './sidebar.component.html',
+  styleUrl: './sidebar.component.css',
 })
-export class HeaderComponent {
+export class SidebarComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  user = toSignal(this.authService.currentUser$, { initialValue: null });
+  user = signal<User | null>(null);
   role = computed(() => this.user()?.role);
+
+  constructor() {
+    this.authService.currentUser$.subscribe((user) => {
+      this.user.set(user);
+    });
+  }
 
   onLogout() {
     this.authService.logoutUser().subscribe({

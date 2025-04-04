@@ -5,6 +5,10 @@
     <!-- <p>logo</p> -->
     <h3 class="font-medium text-lg">Login</h3>
   </div>
+  <app-notification
+    [message]="notif.message$ | async || ''"
+    [type]="notif.type$ | async || 'success'"
+  />
   <form
     [formGroup]="loginForm"
     (ngSubmit)="onLogin()"
