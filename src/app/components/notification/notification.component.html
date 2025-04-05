@@ -1,5 +1,12 @@
 @if(message){
-<div>
+<div
+  [ngClass]="
+    type === 'success'
+      ? 'bg-green-200 text-green-700'
+      : 'bg-red-200 text-red-700'
+  "
+  class="p-2 rounded"
+>
   {{ message }}
 </div>
 }

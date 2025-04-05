@@ -21,7 +21,7 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
-  private notif = inject(NotificationService);
+  protected notif = inject(NotificationService);
 
   loginForm: FormGroup;
 
