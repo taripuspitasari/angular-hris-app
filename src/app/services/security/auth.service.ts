@@ -6,6 +6,7 @@ import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 import { Auth } from '../../types/api/auth';
 import { User } from '../../types/models/user';
 import { handleError } from '../utils/errorHandler';
+import { BaseApiResponse } from '../../types/api/baseApi';
 
 @Injectable({
   providedIn: 'root',
@@ -16,20 +17,22 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  registerUser(data: RegisterRequest): Observable<Auth> {
+  registerUser(data: RegisterRequest): Observable<BaseApiResponse<Auth>> {
     return this.http
-      .post<Auth>(`${environment.apiUrl}/users`, data)
+      .post<BaseApiResponse<Auth>>(`${environment.apiUrl}/users`, data)
       .pipe(catchError(handleError));
   }
 
-  loginUser(data: LoginRequest): Observable<Auth> {
+  loginUser(data: LoginRequest): Observable<BaseApiResponse<Auth>> {
     return this.http
-      .post<Auth>(`${environment.apiUrl}/users/login`, data)
+      .post<BaseApiResponse<Auth>>(`${environment.apiUrl}/users/login`, data)
       .pipe(catchError(handleError));
   }
 
-  logoutUser(): Observable<Auth> {
-    return this.http.delete<Auth>(`${environment.apiUrl}/users/current`);
+  logoutUser(): Observable<BaseApiResponse<Auth>> {
+    return this.http.delete<BaseApiResponse<Auth>>(
+      `${environment.apiUrl}/users/current`
+    );
   }
 
   setUser(user: User | null) {

@@ -1,144 +1,90 @@
-<div class="grid grid-cols-4 gap-1">
-  <div
-    class="cursor-pointer bg-primary-200 p-2 m-2 rounded flex flex-col space-y-2 w-64"
-  >
-    <div class="flex gap-2">
-      <h2 class="font-bold">Product Designer</h2>
-      <p
-        class="border border-lime-500 px-2 text-xs rounded-full bg-lime-200 flex items-center"
+<div class="h-16 w-full flex items-center bg-primary-100 rounded-md">
+  <ul class="flex flex-wrap gap-4">
+    <!-- Job Type -->
+    <li class="flex items-center gap-x-2 p-2 border-r border-gray-300">
+      <label for="job_type" class="text-gray-600 text-sm whitespace-nowrap">
+        Job Type
+      </label>
+      <select class="rounded p-1 text-sm" id="job_type">
+        <option value="">All Job Types</option>
+        <option value="FULL_TIME">Full Time</option>
+        <option value="PART_TIME">Part Time</option>
+        <option value="CONTRACT">Contract</option>
+        <option value="INTERNSHIP">Internship</option>
+      </select>
+    </li>
+
+    <!-- Workplace Type -->
+    <li class="flex items-center gap-x-2 p-2 border-r border-gray-300">
+      <label
+        for="workplace_type"
+        class="text-gray-600 text-sm whitespace-nowrap"
       >
-        OPEN
-      </p>
-    </div>
-    <p class="text-justify">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cumque
-      eius minus pariatur tempora perferendis aliquam eos omnis architecto
-      sapiente.
-    </p>
-    <ul class="flex gap-2">
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Fulltime
-      </li>
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Remote
-      </li>
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Junior
-      </li>
-    </ul>
-    <div class="flex font-medium justify-between">
-      <p>Rp. 5.600.000</p>
-      <p>Jakarta Selatan</p>
-    </div>
-    <button
-      class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full border border-primary-500 text-white font-medium disabled:bg-primary-400"
-    >
-      Apply
-    </button>
-  </div>
-  <div class="bg-primary-200 p-2 m-2 rounded flex flex-col space-y-2 w-64">
-    <div class="flex gap-2">
-      <h2 class="font-bold">Product Designer</h2>
-      <p
-        class="border border-lime-500 px-2 text-xs rounded-full bg-lime-200 flex items-center"
+        Workplace Type
+      </label>
+      <select class="rounded p-1 text-sm" id="workplace_type">
+        <option value="">All Workplace Types</option>
+        <option value="ONSITE">Onsite</option>
+        <option value="REMOTE">Remote</option>
+        <option value="HYBRID">Hybrid</option>
+      </select>
+    </li>
+
+    <!-- Experience Level -->
+    <li class="flex items-center gap-x-2 p-2 border-r border-gray-300">
+      <label
+        for="experience_level"
+        class="text-gray-600 text-sm whitespace-nowrap"
       >
-        OPEN
-      </p>
-    </div>
-    <p class="text-justify">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cumque
-      eius minus pariatur tempora perferendis aliquam eos omnis architecto
-      sapiente.
-    </p>
-    <ul class="flex gap-2">
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Fulltime
-      </li>
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Remote
-      </li>
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Junior
-      </li>
-    </ul>
-    <div class="flex font-medium justify-between">
-      <p>Rp. 5.600.000</p>
-      <p>Jakarta Selatan</p>
-    </div>
-    <button
-      class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full border border-primary-500 text-white font-medium disabled:bg-primary-400"
-    >
-      Apply
-    </button>
-  </div>
-  <div class="bg-primary-200 p-2 m-2 rounded flex flex-col space-y-2 w-64">
-    <div class="flex gap-2">
-      <h2 class="font-bold">Product Designer</h2>
-      <p
-        class="border border-lime-500 px-2 text-xs rounded-full bg-lime-200 flex items-center"
-      >
-        OPEN
-      </p>
-    </div>
-    <p class="text-justify">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cumque
-      eius minus pariatur tempora perferendis aliquam eos omnis architecto
-      sapiente.
-    </p>
-    <ul class="flex gap-2">
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Fulltime
-      </li>
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Remote
-      </li>
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Junior
-      </li>
-    </ul>
-    <div class="flex font-medium justify-between">
-      <p>Rp. 5.600.000</p>
-      <p>Jakarta Selatan</p>
-    </div>
-    <button
-      class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full border border-primary-500 text-white font-medium disabled:bg-primary-400"
-    >
-      Apply
-    </button>
-  </div>
-  <div class="bg-primary-200 p-2 m-2 rounded flex flex-col space-y-2 w-64">
-    <div class="flex gap-2">
-      <h2 class="font-bold">Product Designer</h2>
-      <p
-        class="border border-lime-500 px-2 text-xs rounded-full bg-lime-200 flex items-center"
-      >
-        OPEN
-      </p>
-    </div>
-    <p class="text-justify">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cumque
-      eius minus pariatur tempora perferendis aliquam eos omnis architecto
-      sapiente.
-    </p>
-    <ul class="flex gap-2">
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Fulltime
-      </li>
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Remote
-      </li>
-      <li class="bg-primary-50 border border-primary-300 px-2 rounded-full">
-        Junior
-      </li>
-    </ul>
-    <div class="flex font-medium justify-between">
-      <p>Rp. 5.600.000</p>
-      <p>Jakarta Selatan</p>
-    </div>
-    <button
-      class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full border border-primary-500 text-white font-medium disabled:bg-primary-400"
-    >
-      Apply
-    </button>
-  </div>
+        Experience Level
+      </label>
+      <select class="rounded p-1 text-sm" id="experience_level">
+        <option value="">All Experience Levels</option>
+        <option value="FRESH_GRADUATE">Fresh Graduate</option>
+        <option value="JUNIOR">Junior</option>
+        <option value="MID">Mid</option>
+        <option value="SENIOR">Senior</option>
+        <option value="LEAD">Lead</option>
+      </select>
+    </li>
+
+    <!-- Status -->
+    <li class="flex items-center gap-x-2 p-2 border-r border-gray-300">
+      <label for="status" class="text-gray-600 text-sm whitespace-nowrap">
+        Status
+      </label>
+      <select class="rounded p-1 text-sm" id="status">
+        <option value="">All Statuses</option>
+        <option value="OPEN">Open</option>
+        <option value="CLOSED">Closed</option>
+        <option value="DRAFT">Draft</option>
+      </select>
+    </li>
+
+    <!-- Search -->
+    <li class="flex items-center gap-2 p-2">
+      <button class="bg-primary-300 text-white px-3 py-2 rounded-md text-sm">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <button class="bg-primary-300 text-white px-3 py-2 rounded-md text-sm">
+        Create
+      </button>
+    </li>
+  </ul>
 </div>
+
+<div
+  class="grid [grid-template-columns:repeat(auto-fit,minmax(250px,max-content))] gap-2"
+>
+  @for(job of jobResult; track job.id){
+  <app-job [job]="job" (remove)="deleteJob(job)" (edit)="editJob(job)" />
+  }
+</div>
+
+@if(showForm){
+<app-form-add
+  [jobToEdit]="selectedJob"
+  (jobAdded)="createNewJob($event)"
+  (jobUpdated)="updateJob($event)"
+/>
+}

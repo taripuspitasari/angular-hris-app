@@ -1,12 +1,10 @@
-<div class="bg-primary-600 w-44 min-h-[calc(100vh-4rem)] py-2">
+<div class="bg-primary-300 w-44 min-h-screen py-2">
   @if(user()) {
   <ul class="flex flex-col gap-2 justify-end px-3">
-    <li
-      class="hidden font-medium h-16 text-lg items-center justify-between p-1"
-    >
-      <div><p>PeopleZ</p></div>
+    <li class="flex font-medium my-3 items-center justify-between px-1">
+      <div><p class="font-bold text-xl text-primary-800">PeopleZ</p></div>
       <div
-        class="bg-primary-700 h-6 w-6 text-primary-600 flex items-center justify-center rounded-md"
+        class="bg-primary-600 h-6 w-6 text-primary-300 flex items-center justify-center rounded-md"
       >
         <i class="fa-solid fa-angle-left text-xs"></i>
       </div>
@@ -47,7 +45,7 @@
     <li
       class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
     >
-      <a routerLink="/recruitment">Recruitment</a>
+      <a routerLink="recruitment">Recruitment</a>
     </li>
     <li
       class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"

@@ -1,8 +1,4 @@
-import { BaseApiResponse } from './baseApi';
-
-// export interface Auth {}
-
-export interface Auth extends BaseApiResponse<Auth> {
+export interface Auth {
   id: string;
   name: string;
   email: string;

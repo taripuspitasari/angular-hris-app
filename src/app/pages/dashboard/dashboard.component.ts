@@ -1,7 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { NotificationComponent } from '../../components/notification/notification.component';
 import { NotificationService } from '../../services/utils/notification.service';
 import { AsyncPipe } from '@angular/common';
+import { AuthService } from '../../services/security/auth.service';
+import { User } from '../../types/models/user';
 
 @Component({
   selector: 'app-dashboard',

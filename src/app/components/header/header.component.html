@@ -1,4 +1,4 @@
-<nav class="bg-primary-700 text-white p-2 h-16 flex flex-row items-center">
+<nav class="bg-primary-600 text-white p-2 h-16 flex flex-row items-center">
   <ul class="flex justify-between w-full px-2">
     @if(user()) {
     <li class="lg:hidden font-medium text-lg flex items-center w-1/3">
@@ -15,7 +15,7 @@
     <!-- search bar -->
     <li class="flex items-center w-1/3 justify-center">
       <input
-        class="w-72 outline-none border border-primary-600 px-2 py-1 rounded"
+        class="w-72 outline-none border border-primary-500 px-2 py-1 rounded"
         type="search"
         placeholder="Find your dream job..."
       />
@@ -23,13 +23,13 @@
     <li class="flex gap-2 w-1/3 justify-end">
       <a
         routerLink="/login"
-        class="bg-primary-500 hover:bg-primary-600 font-medium px-3 py-1 rounded cursor-pointer"
+        class="bg-primary-500 hover:bg-primary-700 font-medium px-3 py-1 rounded cursor-pointer"
       >
         Log in
       </a>
       <a
         routerLink="/register"
-        class="bg-primary-500 hover:bg-primary-600 font-medium px-3 py-1 rounded cursor-pointer"
+        class="bg-primary-500 hover:bg-primary-700 font-medium px-3 py-1 rounded cursor-pointer"
       >
         Sign up
       </a>
@@ -45,45 +45,6 @@
       <div class="h-9 w-9 border rounded-full">
         <img src="" alt="" />
       </div>
-      <!-- @if (role() === 'APPLICANT') {
-      <div>
-        <a routerLink="/jobs">Job Listings</a>
-        <a routerLink="/applications">My Applications</a>
-      </div>
-      } @if (role() === 'EMPLOYEE') {
-      <div>
-        <a routerLink="/attendance">Attendance</a>
-        <a routerLink="/leave">Leave Requests</a>
-        <a routerLink="/payroll">Payslip</a>
-        <a routerLink="/performance">Performance Review</a>
-      </div>
-      } @if (role() === 'HR') {
-      <div>
-        <a routerLink="/recruitment">Recruitment</a>
-        <a routerLink="/employees">Employee Management</a>
-        <a routerLink="/attendance">Attendance Reports</a>
-        <a routerLink="/leave-approvals">Leave Approvals</a>
-        <a routerLink="/performance-reviews">Performance Reviews</a>
-      </div>
-      } @if (role() === 'ADMIN') {
-      <div>
-        <a routerLink="/recruitment">Recruitment</a>
-        <a routerLink="/employees">Manage Employees</a>
-        <a routerLink="/attendance">Attendance Data</a>
-        <a routerLink="/payroll">Payroll Management</a>
-        <a routerLink="/leave-policy">Leave Policies</a>
-        <a routerLink="/performance">Performance Reports</a>
-        <a routerLink="/user-management">User Roles</a>
-      </div>
-      } -->
-
-      <!-- <a routerLink="/profile">My Profile</a>
-      <button
-        (click)="onLogout()"
-        class="bg-primary-500 hover:bg-primary-600 font-medium px-3 py-1 rounded cursor-pointer"
-      >
-        Log out
-      </button> -->
     </li>
     }
   </ul>

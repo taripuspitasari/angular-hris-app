@@ -1,0 +1,49 @@
+<div
+  class="cursor-pointer bg-primary-300 p-2 m-2 rounded flex flex-col space-y-2 w-64 shadow-xl"
+>
+  <div class="flex gap-2">
+    <h2 class="font-bold">{{ job.title }}</h2>
+    <p
+      class="border border-lime-500 px-2 text-xs rounded-full bg-lime-200 flex items-center"
+    >
+      {{ job.status }}
+    </p>
+  </div>
+  <p class="text-justify">
+    {{ job.description }}
+  </p>
+  <ul class="flex gap-2 overflow-x-visible">
+    <li class="bg-primary-200 border border-primary-300 px-2 rounded-full">
+      {{ job.job_type }}
+    </li>
+    <li class="bg-primary-200 border border-primary-300 px-2 rounded-full">
+      {{ job.workplace_type }}
+    </li>
+    <li class="bg-primary-200 border border-primary-300 px-2 rounded-full">
+      {{ job.experience_level }}
+    </li>
+  </ul>
+  <div class="flex font-medium justify-between">
+    <p>{{ job.salary_range }}</p>
+    <p>{{ job.location }}</p>
+  </div>
+  <!-- <button
+    class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full border border-primary-500 text-white font-medium disabled:bg-primary-400"
+  >
+    Apply
+  </button> -->
+  <div class="w-full grid grid-cols-2 gap-2">
+    <button
+      class="bg-lime-600 hover:bg-lime-700 px-3 py-1 rounded cursor-pointer text-white font-medium disabled:bg-primary-400"
+      (click)="edit.emit()"
+    >
+      Edit
+    </button>
+    <button
+      class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded cursor-pointer text-white font-medium disabled:bg-primary-400"
+      (click)="remove.emit()"
+    >
+      Delete
+    </button>
+  </div>
+</div>

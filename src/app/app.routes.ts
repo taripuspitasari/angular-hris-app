@@ -35,6 +35,10 @@ export const routes: Routes = [
         component: JobsComponent,
       },
       {
+        path: 'recruitment',
+        component: JobsComponent,
+      },
+      {
         path: 'applications',
         component: ApplicationsComponent,
       },

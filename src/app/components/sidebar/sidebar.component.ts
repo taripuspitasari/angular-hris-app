@@ -17,9 +17,12 @@ export class SidebarComponent {
   user = signal<User | null>(null);
   role = computed(() => this.user()?.role);
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit() {
     this.authService.currentUser$.subscribe((user) => {
       this.user.set(user);
+      console.log('dari sidebar', user);
     });
   }
 

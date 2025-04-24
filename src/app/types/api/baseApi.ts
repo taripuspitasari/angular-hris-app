@@ -3,10 +3,13 @@ export interface BaseApiResponse<T> {
   message: string;
 }
 
-export interface PaginatedResponse<T> extends BaseApiResponse<T> {
-  total: number;
-  page: number;
-  pageSize: number;
+export interface PaginatedResponse<T> {
+  data: T[];
+  paging: {
+    current_page: number;
+    size: number;
+    total_page: number;
+  };
 }
 
 export interface ErrorResponse {
