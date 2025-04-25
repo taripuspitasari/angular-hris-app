@@ -63,10 +63,15 @@
 
     <!-- Search -->
     <li class="flex items-center gap-2 p-2">
-      <button class="bg-primary-300 text-white px-3 py-2 rounded-md text-sm">
+      <button
+        class="bg-primary-300 text-white px-3 py-2 rounded-md text-sm cursor-pointer"
+      >
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
-      <button class="bg-primary-300 text-white px-3 py-2 rounded-md text-sm">
+      <button
+        class="bg-primary-300 text-white px-3 py-2 rounded-md text-sm cursor-pointer"
+        (click)="createJob()"
+      >
         Create
       </button>
     </li>
@@ -86,5 +91,6 @@
   [jobToEdit]="selectedJob"
   (jobAdded)="createNewJob($event)"
   (jobUpdated)="updateJob($event)"
+  (close)="closeForm()"
 />
 }

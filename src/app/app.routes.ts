@@ -8,7 +8,6 @@ import { DefaultLayoutComponent } from './components/default-layout/default-layo
 import { GuestLayoutComponent } from './components/guest-layout/guest-layout.component';
 import { JobsComponent } from './pages/jobs/jobs.component';
 import { ApplicationsComponent } from './pages/applications/applications.component';
-import { EmployeesComponent } from './pages/employees/employees.component';
 
 export const routes: Routes = [
   {
@@ -41,10 +40,6 @@ export const routes: Routes = [
       {
         path: 'applications',
         component: ApplicationsComponent,
-      },
-      {
-        path: 'employees',
-        component: EmployeesComponent,
       },
     ],
   },

@@ -5,6 +5,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Job as JobModel } from '../../../types/models/job';
+import { Job as JobRequest } from '../../../types/request/job';
 
 @Component({
   selector: 'app-form-add',
@@ -14,11 +16,11 @@ import {
 })
 export class FormAddComponent {
   private fb = inject(FormBuilder);
-  @Input() jobToEdit?: any;
-  @Input() toggleForm: any;
+  @Input() jobToEdit?: JobModel;
 
-  @Output() jobUpdated = new EventEmitter<any>();
-  @Output() jobAdded = new EventEmitter<any>();
+  @Output() jobUpdated = new EventEmitter<JobRequest>();
+  @Output() jobAdded = new EventEmitter<JobRequest>();
+  @Output() close = new EventEmitter<void>();
 
   newJobForm: FormGroup;
 
@@ -41,6 +43,10 @@ export class FormAddComponent {
       this.newJobForm.patchValue(this.jobToEdit);
       console.log('dari form', this.jobToEdit);
     }
+  }
+
+  onClose() {
+    this.close.emit();
   }
 
   onSubmit() {

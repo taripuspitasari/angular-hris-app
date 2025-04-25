@@ -14,13 +14,13 @@
   </p>
   <ul class="flex gap-2 overflow-x-visible">
     <li class="bg-primary-200 border border-primary-300 px-2 rounded-full">
-      {{ job.job_type }}
+      {{ job.job_type | enumLabel }}
     </li>
     <li class="bg-primary-200 border border-primary-300 px-2 rounded-full">
-      {{ job.workplace_type }}
+      {{ job.workplace_type | enumLabel }}
     </li>
     <li class="bg-primary-200 border border-primary-300 px-2 rounded-full">
-      {{ job.experience_level }}
+      {{ job.experience_level | enumLabel }}
     </li>
   </ul>
   <div class="flex font-medium justify-between">

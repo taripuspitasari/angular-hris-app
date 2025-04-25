@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { LoginRequest, RegisterRequest } from '../../types/request/auth';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
-import { Auth } from '../../types/api/auth';
+import { Auth } from '../../types/models/auth';
 import { User } from '../../types/models/user';
 import { handleError } from '../utils/errorHandler';
 import { BaseApiResponse } from '../../types/api/baseApi';

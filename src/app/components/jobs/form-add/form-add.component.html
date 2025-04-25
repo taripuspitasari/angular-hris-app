@@ -1,161 +1,166 @@
-<main
-  class="flex flex-col space-y-4 justify-center items-center text-primary-900"
->
-  <div>
-    <!-- <p>logo</p> -->
-    <h3 class="font-medium text-lg">Add New Job</h3>
-  </div>
-  <form
-    [formGroup]="newJobForm"
-    (ngSubmit)="onSubmit()"
-    class="grid grid-cols-2 gap-2 bg-primary-100 w-1/2 lg:w-2/3 p-5 rounded-md shadow-xl"
+<main class="fixed inset-0 bg-white/50 z-40">
+  <div
+    class="w-full md:w-1/2 z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary-100 p-5 rounded-lg shadow-lg"
   >
-    <div class="flex flex-col space-y-1 col-span-2">
-      <label for="title" class="">Job Title</label>
-      <input
-        type="text"
-        class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
-        id="title"
-        formControlName="title"
-        placeholder="Enter job title"
-      />
-      @if(isInvalid('title')){
-      <p class="text-xs text-red-500">Job title is required</p>
-      }
+    <div class="relative flex justify-center items-center">
+      <!-- <p>logo</p> -->
+      <h3 class="font-medium text-lg text-center pb-2">Add New Job</h3>
+      <button class="absolute top-0 right-0 cursor-pointer" (click)="onClose()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
-
-    <div class="flex flex-col space-y-1 col-span-2">
-      <label for="description" class="">Job Description</label>
-      <input
-        type="text"
-        class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
-        id="description"
-        formControlName="description"
-        placeholder="Enter job description"
-      />
-      @if(isInvalid('description')){
-      <p class="text-xs text-red-500">Job description is required</p>
-      }
-    </div>
-
-    <div class="flex flex-col space-y-1">
-      <label for="status" class="">Job Status</label>
-      <select
-        class="border border-primary-600 rounded outline-0 p-1"
-        id="status"
-        formControlName="status"
-      >
-        <option value="">Select job status</option>
-        <option value="OPEN">Open</option>
-        <option value="CLOSED">Closed</option>
-        <option value="DRAFT">Draft</option>
-      </select>
-      @if(isInvalid('status')){
-      <p class="text-xs text-red-500">Job status is required</p>
-      }
-    </div>
-
-    <div class="flex flex-col space-y-1">
-      <label for="job_type" class="">Job Type</label>
-      <select
-        class="border border-primary-600 rounded outline-0 p-1"
-        id="job_type"
-        formControlName="job_type"
-      >
-        <option value="">Select job type</option>
-        <option value="FULL_TIME">Full Time</option>
-        <option value="PART_TIME">Part Time</option>
-        <option value="CONTRACT">Contract</option>
-        <option value="INTERNSHIP">Internship</option>
-      </select>
-      @if(isInvalid('job_type')){
-      <p class="text-xs text-red-500">Job type is required</p>
-      }
-    </div>
-
-    <div class="flex flex-col space-y-1">
-      <label for="workplace_type" class="">Workplace Type</label>
-      <select
-        class="border border-primary-600 rounded outline-0 p-1"
-        id="workplace_type"
-        formControlName="workplace_type"
-      >
-        <option value="">Select job workplace type</option>
-        <option value="ONSITE">Onsite</option>
-        <option value="REMOTE">Remote</option>
-        <option value="HYBRID">Hybrid</option>
-      </select>
-      @if(isInvalid('workplace_type')){
-      <p class="text-xs text-red-500">Job workplace type is required</p>
-      }
-    </div>
-
-    <div class="flex flex-col space-y-1">
-      <label for="experience_level" class="">Experience Level</label>
-      <select
-        class="border border-primary-600 rounded outline-0 p-1"
-        id="experience_level"
-        formControlName="experience_level"
-      >
-        <option value="">Select job experience level</option>
-        <option value="FRESH_GRADUATE">Fresh Graduate</option>
-        <option value="JUNIOR">Junior</option>
-        <option value="MID">Mid</option>
-        <option value="SENIOR">Senior</option>
-        <option value="LEAD">Lead</option>
-      </select>
-      @if(isInvalid('experience_level')){
-      <p class="text-xs text-red-500">Job experience level is required</p>
-      }
-    </div>
-
-    <div class="flex flex-col space-y-1 col-span-2">
-      <label for="location" class="">Location</label>
-      <input
-        type="text"
-        class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
-        id="location"
-        formControlName="location"
-        placeholder="Enter job location"
-      />
-      @if(isInvalid('location')){
-      <p class="text-xs text-red-500">Job location is required</p>
-      }
-    </div>
-
-    <div class="flex flex-col space-y-1">
-      <label for="salary_range" class="">Salary Range</label>
-      <input
-        type="text"
-        class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
-        id="salary_range"
-        formControlName="salary_range"
-        placeholder="Enter job salary range"
-      />
-      @if(isInvalid('salary_range')){
-      <p class="text-xs text-red-500">Job salary range is required</p>
-      }
-    </div>
-
-    <div class="flex flex-col space-y-1">
-      <label for="expiry_date" class="">Expire Date</label>
-      <input
-        type="date"
-        class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
-        id="expiry_date"
-        formControlName="expiry_date"
-      />
-      @if(isInvalid('expiry_date')){
-      <p class="text-xs text-red-500">Job expire date is required</p>
-      }
-    </div>
-
-    <button
-      type="submit"
-      [disabled]="newJobForm.invalid"
-      class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full col-span-2 border border-primary-500 text-white font-medium"
+    <form
+      [formGroup]="newJobForm"
+      (ngSubmit)="onSubmit()"
+      class="grid grid-cols-2 gap-2"
     >
-      {{ jobToEdit ? "Update job" : "Create new job" }}
-    </button>
-  </form>
+      <div class="flex flex-col space-y-1 col-span-2">
+        <label for="title" class="">Job Title</label>
+        <input
+          type="text"
+          class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
+          id="title"
+          formControlName="title"
+          placeholder="Enter job title"
+        />
+        @if(isInvalid('title')){
+        <p class="text-xs text-red-500">Job title is required</p>
+        }
+      </div>
+
+      <div class="flex flex-col space-y-1 col-span-2">
+        <label for="description" class="">Job Description</label>
+        <input
+          type="text"
+          class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
+          id="description"
+          formControlName="description"
+          placeholder="Enter job description"
+        />
+        @if(isInvalid('description')){
+        <p class="text-xs text-red-500">Job description is required</p>
+        }
+      </div>
+
+      <div class="flex flex-col space-y-1">
+        <label for="status" class="">Job Status</label>
+        <select
+          class="border border-primary-600 rounded outline-0 p-1"
+          id="status"
+          formControlName="status"
+        >
+          <option value="">Select job status</option>
+          <option value="OPEN">Open</option>
+          <option value="CLOSED">Closed</option>
+          <option value="DRAFT">Draft</option>
+        </select>
+        @if(isInvalid('status')){
+        <p class="text-xs text-red-500">Job status is required</p>
+        }
+      </div>
+
+      <div class="flex flex-col space-y-1">
+        <label for="job_type" class="">Job Type</label>
+        <select
+          class="border border-primary-600 rounded outline-0 p-1"
+          id="job_type"
+          formControlName="job_type"
+        >
+          <option value="">Select job type</option>
+          <option value="FULL_TIME">Full Time</option>
+          <option value="PART_TIME">Part Time</option>
+          <option value="CONTRACT">Contract</option>
+          <option value="INTERNSHIP">Internship</option>
+        </select>
+        @if(isInvalid('job_type')){
+        <p class="text-xs text-red-500">Job type is required</p>
+        }
+      </div>
+
+      <div class="flex flex-col space-y-1">
+        <label for="workplace_type" class="">Workplace Type</label>
+        <select
+          class="border border-primary-600 rounded outline-0 p-1"
+          id="workplace_type"
+          formControlName="workplace_type"
+        >
+          <option value="">Select job workplace type</option>
+          <option value="ONSITE">Onsite</option>
+          <option value="REMOTE">Remote</option>
+          <option value="HYBRID">Hybrid</option>
+        </select>
+        @if(isInvalid('workplace_type')){
+        <p class="text-xs text-red-500">Job workplace type is required</p>
+        }
+      </div>
+
+      <div class="flex flex-col space-y-1">
+        <label for="experience_level" class="">Experience Level</label>
+        <select
+          class="border border-primary-600 rounded outline-0 p-1"
+          id="experience_level"
+          formControlName="experience_level"
+        >
+          <option value="">Select job experience level</option>
+          <option value="FRESH_GRADUATE">Fresh Graduate</option>
+          <option value="JUNIOR">Junior</option>
+          <option value="MID">Mid</option>
+          <option value="SENIOR">Senior</option>
+          <option value="LEAD">Lead</option>
+        </select>
+        @if(isInvalid('experience_level')){
+        <p class="text-xs text-red-500">Job experience level is required</p>
+        }
+      </div>
+
+      <div class="flex flex-col space-y-1 col-span-2">
+        <label for="location" class="">Location</label>
+        <input
+          type="text"
+          class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
+          id="location"
+          formControlName="location"
+          placeholder="Enter job location"
+        />
+        @if(isInvalid('location')){
+        <p class="text-xs text-red-500">Job location is required</p>
+        }
+      </div>
+
+      <div class="flex flex-col space-y-1">
+        <label for="salary_range" class="">Salary Range</label>
+        <input
+          type="text"
+          class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
+          id="salary_range"
+          formControlName="salary_range"
+          placeholder="Enter job salary range"
+        />
+        @if(isInvalid('salary_range')){
+        <p class="text-xs text-red-500">Job salary range is required</p>
+        }
+      </div>
+
+      <div class="flex flex-col space-y-1">
+        <label for="expiry_date" class="">Expire Date</label>
+        <input
+          type="date"
+          class="border border-primary-600 rounded outline-0 p-1 placeholder:text-xs"
+          id="expiry_date"
+          formControlName="expiry_date"
+        />
+        @if(isInvalid('expiry_date')){
+        <p class="text-xs text-red-500">Job expire date is required</p>
+        }
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="newJobForm.invalid"
+        class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full col-span-2 border border-primary-500 text-white font-medium"
+      >
+        {{ jobToEdit ? "Update job" : "Create new job" }}
+      </button>
+    </form>
+  </div>
 </main>
