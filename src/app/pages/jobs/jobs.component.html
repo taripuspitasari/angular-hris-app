@@ -1,44 +1,55 @@
-<div class="h-16 w-full flex items-center bg-primary-100 rounded-md">
-  <ul class="flex flex-wrap gap-4">
-    <!-- Job Type -->
-    <li class="flex items-center gap-x-2 p-2 border-r border-gray-300">
-      <label for="job_type" class="text-gray-600 text-sm whitespace-nowrap">
-        Job Type
+<main class="space-y-4">
+  <form
+    [formGroup]="searchForm"
+    (ngSubmit)="onSearch()"
+    class="w-full flex flex-wrap justify-between bg-primary-100 rounded-md"
+  >
+    <div class="flex items-center gap-3 p-2 border-r border-gray-300">
+      <label for="title" class="text-gray-600 text-sm whitespace-nowrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
       </label>
-      <select class="rounded p-1 text-sm" id="job_type">
+      <input
+        type="text"
+        class="text-sm outline-0 border-gray-300"
+        id="title"
+        formControlName="title"
+        placeholder="Search by title"
+      />
+    </div>
+
+    <div class="flex items-center gap-1 p-2 border-r border-gray-300">
+      <select
+        class="rounded text-sm outline-0 text-center"
+        id="job_type"
+        formControlName="job_type"
+      >
         <option value="">All Job Types</option>
         <option value="FULL_TIME">Full Time</option>
         <option value="PART_TIME">Part Time</option>
         <option value="CONTRACT">Contract</option>
         <option value="INTERNSHIP">Internship</option>
       </select>
-    </li>
+    </div>
 
-    <!-- Workplace Type -->
-    <li class="flex items-center gap-x-2 p-2 border-r border-gray-300">
-      <label
-        for="workplace_type"
-        class="text-gray-600 text-sm whitespace-nowrap"
+    <div class="flex items-center gap-1 p-2 border-r border-gray-300">
+      <select
+        class="rounded text-sm outline-0 text-center"
+        id="workplace_type"
+        formControlName="workplace_type"
       >
-        Workplace Type
-      </label>
-      <select class="rounded p-1 text-sm" id="workplace_type">
         <option value="">All Workplace Types</option>
         <option value="ONSITE">Onsite</option>
         <option value="REMOTE">Remote</option>
         <option value="HYBRID">Hybrid</option>
       </select>
-    </li>
+    </div>
 
-    <!-- Experience Level -->
-    <li class="flex items-center gap-x-2 p-2 border-r border-gray-300">
-      <label
-        for="experience_level"
-        class="text-gray-600 text-sm whitespace-nowrap"
+    <div class="flex items-center gap-1 p-2">
+      <select
+        class="rounded text-sm outline-0 text-center"
+        id="experience_level"
+        formControlName="experience_level"
       >
-        Experience Level
-      </label>
-      <select class="rounded p-1 text-sm" id="experience_level">
         <option value="">All Experience Levels</option>
         <option value="FRESH_GRADUATE">Fresh Graduate</option>
         <option value="JUNIOR">Junior</option>
@@ -46,51 +57,73 @@
         <option value="SENIOR">Senior</option>
         <option value="LEAD">Lead</option>
       </select>
-    </li>
+    </div>
 
-    <!-- Status -->
-    <li class="flex items-center gap-x-2 p-2 border-r border-gray-300">
-      <label for="status" class="text-gray-600 text-sm whitespace-nowrap">
-        Status
-      </label>
-      <select class="rounded p-1 text-sm" id="status">
-        <option value="">All Statuses</option>
-        <option value="OPEN">Open</option>
-        <option value="CLOSED">Closed</option>
-        <option value="DRAFT">Draft</option>
-      </select>
-    </li>
-
-    <!-- Search -->
-    <li class="flex items-center gap-2 p-2">
+    <div class="flex items-center gap-2 p-2">
       <button
-        class="bg-primary-300 text-white px-3 py-2 rounded-md text-sm cursor-pointer"
+        class="bg-primary-300 flex gap-3 items-center text-white px-3 py-2 rounded-md text-sm cursor-pointer"
+        type="submit"
       >
         <i class="fa-solid fa-magnifying-glass"></i>
+        <p>Search</p>
       </button>
+      @if(user()?.role === 'HR') {
       <button
-        class="bg-primary-300 text-white px-3 py-2 rounded-md text-sm cursor-pointer"
+        class="bg-primary-300 flex gap-3 items-center text-white px-3 py-2 rounded-md text-sm cursor-pointer"
         (click)="createJob()"
       >
-        Create
+        <i class="fa-solid fa-plus"></i>
+        <p>Create</p>
       </button>
-    </li>
-  </ul>
-</div>
+      }
+    </div>
+  </form>
 
-<div
-  class="grid [grid-template-columns:repeat(auto-fit,minmax(250px,max-content))] gap-2"
->
-  @for(job of jobResult; track job.id){
-  <app-job [job]="job" (remove)="deleteJob(job)" (edit)="editJob(job)" />
+  @if(jobResult.length === 0){
+  <div class="text-center py-4">
+    <p>No results found</p>
+  </div>
+  } @if(jobResult.length > 0){
+  <div class="grid md:grid-cols-4 grid-cols-1 gap-2 md:h-96 mb-8 content-start">
+    @for(job of jobResult; track job.id){
+    <app-job
+      [job]="job"
+      (remove)="deleteJob(job)"
+      (edit)="editJob(job)"
+      (show)="detailJob(job)"
+    />
+    }
+  </div>
+
+  <div class="flex justify-center gap-3">
+    <div
+      class="border border-primary-500 rounded-full w-6 h-6 flex items-center justify-center cursor-pointer"
+      (click)="onPrev()"
+    >
+      <i class="fa-solid fa-angle-left"></i>
+    </div>
+    <p class="h-6 flex items-center justify-center">
+      {{ this.pageNumber }} of {{ this.totalPages }}
+    </p>
+    <div
+      class="border border-primary-500 rounded-full w-6 h-6 flex items-center justify-center cursor-pointer"
+      (click)="onNext()"
+    >
+      <i class="fa-solid fa-angle-right"></i>
+    </div>
+  </div>
   }
-</div>
 
-@if(showForm){
-<app-form-add
-  [jobToEdit]="selectedJob"
-  (jobAdded)="createNewJob($event)"
-  (jobUpdated)="updateJob($event)"
-  (close)="closeForm()"
-/>
-}
+  <!-- modal -->
+
+  @if(showForm){
+  <app-form-add
+    [jobToEdit]="selectedJob"
+    (jobAdded)="createNewJob($event)"
+    (jobUpdated)="updateJob($event)"
+    (close)="closeForm()"
+  />
+  } @else if(showJobDetail){
+  <app-job-detail [JobToShow]="selectedShow" (close)="closeDetail()" />
+  }
+</main>

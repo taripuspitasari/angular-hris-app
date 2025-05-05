@@ -1,8 +1,10 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../services/security/auth.service';
 import { Router, RouterLink } from '@angular/router';
-import { User } from '../../types/models/user';
 import { CommonModule } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NotificationService } from '../../services/utils/notification.service';
+import { User } from '../../types/models/user';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,29 +15,47 @@ import { CommonModule } from '@angular/common';
 export class SidebarComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
+  public showSidebar = true;
+  protected notif = inject(NotificationService);
 
+  // user = toSignal(this.authService.currentUser$, { initialValue: null });
   user = signal<User | null>(null);
-  role = computed(() => this.user()?.role);
 
   constructor() {}
 
   ngOnInit() {
-    this.authService.currentUser$.subscribe((user) => {
-      this.user.set(user);
-      console.log('dari sidebar', user);
-    });
+    this.user.set(this.authService.getUser());
+    // if (localStorage.getItem('ACCESS_TOKEN')) {
+    //   this.authService.getCurrentUser().subscribe({
+    //     next: (response) => {
+    //       this.authService.setUser(response.data || null);
+    //     },
+    //     error: (err) => {
+    //       this.notif.show(err.error.errors, 'error');
+    //     },
+    //   });
+    // }
+  }
+
+  openSidebar() {
+    this.showSidebar = true;
+  }
+
+  closeSidebar() {
+    this.showSidebar = false;
   }
 
   onLogout() {
     this.authService.logoutUser().subscribe({
       next: (response) => {
-        console.log(response.message);
+        this.notif.show(response.message, 'success');
         localStorage.removeItem('ACCESS_TOKEN');
+        localStorage.removeItem('USER');
         this.authService.setUser(null);
         this.router.navigate(['/login']);
       },
       error: (err) => {
-        console.log(err);
+        this.notif.show(err.error.errors, 'error');
       },
     });
   }

@@ -15,11 +15,11 @@ export class JobService {
 
   constructor(private http: HttpClient) {}
 
-  getAllJobs(): Observable<PaginatedResponse<Job>> {
-    return this.http.get<PaginatedResponse<Job>>(this.endpoint);
+  getAllJobs(params?: any): Observable<PaginatedResponse<Job>> {
+    return this.http.get<PaginatedResponse<Job>>(this.endpoint, { params });
   }
 
-  getJobById(id: string): Observable<BaseApiResponse<Job>> {
+  getJobById(id: number): Observable<BaseApiResponse<Job>> {
     return this.http.get<BaseApiResponse<Job>>(`${this.endpoint}/${id}`);
   }
 

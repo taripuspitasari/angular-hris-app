@@ -1,15 +1,19 @@
-<div class="bg-primary-300 w-44 min-h-screen py-2">
+@if(showSidebar){
+<div
+  class="bg-primary-300 w-44 min-h-screen py-2 transition delay-150 duration-300 ease-in-out"
+>
   @if(user()) {
   <ul class="flex flex-col gap-2 justify-end px-3">
     <li class="flex font-medium my-3 items-center justify-between px-1">
       <div><p class="font-bold text-xl text-primary-800">PeopleZ</p></div>
-      <div
-        class="bg-primary-600 h-6 w-6 text-primary-300 flex items-center justify-center rounded-md"
+      <button
+        class="bg-primary-600 h-6 w-6 text-primary-300 flex items-center justify-center rounded-md cursor-pointer"
+        (click)="closeSidebar()"
       >
         <i class="fa-solid fa-angle-left text-xs"></i>
-      </div>
+      </button>
     </li>
-    @if (role() === 'APPLICANT') {
+    @if (user()?.role === 'APPLICANT') {
     <li
       class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
     >
@@ -20,7 +24,7 @@
     >
       <a routerLink="applications">My Applications</a>
     </li>
-    } @if (role() === 'EMPLOYEE') {
+    } @if (user()?.role === 'EMPLOYEE') {
     <li
       class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
     >
@@ -41,7 +45,7 @@
     >
       <a routerLink="/performance">Performance Review</a>
     </li>
-    } @if (role() === 'HR') {
+    } @if ( user()?.role === 'HR') {
     <li
       class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
     >
@@ -67,7 +71,7 @@
     >
       <a routerLink="/performance-reviews">Performance Reviews</a>
     </li>
-    } @if (role() === 'ADMIN') {
+    } @if (user()?.role === 'ADMIN') {
     <li
       class="cursor-pointer hover:bg-primary-700 hover:text-white p-1 rounded"
     >
@@ -116,3 +120,15 @@
   </ul>
   }
 </div>
+} @if(!showSidebar){
+<div
+  class="bg-primary-300 min-h-screen py-2 transition delay-150 duration-300 ease-in-out"
+>
+  <button
+    class="bg-primary-600 h-6 w-6 my-3 mx-2 text-primary-300 flex items-center justify-center rounded-md cursor-pointer"
+    (click)="openSidebar()"
+  >
+    <i class="fa-solid fa-angle-right text-xs"></i>
+  </button>
+</div>
+}

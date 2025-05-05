@@ -5,6 +5,12 @@
     <!-- <p>logo</p> -->
     <h3 class="font-medium text-lg">Sign Up</h3>
   </div>
+
+  <app-notification
+    [message]="(notif.message$ | async) || ''"
+    [type]="(notif.type$ | async) || 'success'"
+  />
+
   <form
     [formGroup]="registerForm"
     (ngSubmit)="onRegister()"

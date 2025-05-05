@@ -9,10 +9,13 @@ import { Router, RouterLink } from '@angular/router';
 import { passwordMismatchValidator } from '../../../core/directives/password-mismatch.directive';
 import { AuthService } from '../../../services/security/auth.service';
 import { RegisterRequest } from '../../../types/request/auth';
+import { NotificationService } from '../../../services/utils/notification.service';
+import { NotificationComponent } from '../../../components/notification/notification.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NotificationComponent, AsyncPipe],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -20,6 +23,7 @@ export class RegisterComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  protected notif = inject(NotificationService);
 
   registerForm: FormGroup;
 
@@ -42,11 +46,11 @@ export class RegisterComponent {
     delete data.confirmPassword;
     this.authService.registerUser(data as RegisterRequest).subscribe({
       next: (response) => {
-        console.log(response);
         this.router.navigate(['login']);
+        this.notif.show('Registration success, login now!', 'success');
       },
       error: (err) => {
-        console.log(err.message);
+        this.notif.show(err.error.errors, 'error');
       },
     });
   }

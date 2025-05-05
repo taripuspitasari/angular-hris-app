@@ -1,5 +1,6 @@
 <div
-  class="cursor-pointer bg-primary-300 p-2 m-2 rounded flex flex-col space-y-2 w-64 shadow-xl"
+  class="cursor-pointer bg-primary-300 p-2 rounded flex flex-col space-y-2 shadow-xl"
+  (click)="show.emit()"
 >
   <div class="flex gap-2">
     <h2 class="font-bold">{{ job.title }}</h2>
@@ -10,16 +11,28 @@
     </p>
   </div>
   <p class="text-justify">
-    {{ job.description }}
+    {{
+      job.description.length > 100
+        ? (job.description | slice : 0 : 100) + "..."
+        : job.description
+    }}
+    <!-- <a href="dashboard/recruitment?{{ job.id }}">Read More</a> -->
+    <span (click)="show.emit()">Read More</span>
   </p>
-  <ul class="flex gap-2 overflow-x-visible">
-    <li class="bg-primary-200 border border-primary-300 px-2 rounded-full">
+  <ul class="flex gap-1 overflow-x-visible">
+    <li
+      class="bg-primary-200 border border-primary-300 px-2 rounded-md whitespace-nowrap"
+    >
       {{ job.job_type | enumLabel }}
     </li>
-    <li class="bg-primary-200 border border-primary-300 px-2 rounded-full">
+    <li
+      class="bg-primary-200 border border-primary-300 px-2 rounded-md whitespace-nowrap"
+    >
       {{ job.workplace_type | enumLabel }}
     </li>
-    <li class="bg-primary-200 border border-primary-300 px-2 rounded-full">
+    <li
+      class="bg-primary-200 border border-primary-300 px-2 rounded-md whitespace-nowrap"
+    >
       {{ job.experience_level | enumLabel }}
     </li>
   </ul>
@@ -27,23 +40,26 @@
     <p>{{ job.salary_range }}</p>
     <p>{{ job.location }}</p>
   </div>
-  <!-- <button
+  @if(user()?.role === 'APPLICANT'){
+  <button
     class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full border border-primary-500 text-white font-medium disabled:bg-primary-400"
   >
     Apply
-  </button> -->
+  </button>
+  } @if(user()?.role !== 'APPLICANT'){
   <div class="w-full grid grid-cols-2 gap-2">
     <button
       class="bg-lime-600 hover:bg-lime-700 px-3 py-1 rounded cursor-pointer text-white font-medium disabled:bg-primary-400"
-      (click)="edit.emit()"
+      (click)="edit.emit(); $event.stopPropagation()"
     >
       Edit
     </button>
     <button
       class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded cursor-pointer text-white font-medium disabled:bg-primary-400"
-      (click)="remove.emit()"
+      (click)="remove.emit(); $event.stopPropagation()"
     >
       Delete
     </button>
   </div>
+  }
 </div>

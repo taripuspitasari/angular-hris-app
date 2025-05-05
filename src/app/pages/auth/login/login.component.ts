@@ -38,7 +38,6 @@ export class LoginComponent {
     const data = this.loginForm.value;
     this.authService.loginUser(data).subscribe({
       next: (response) => {
-        console.log(response);
         localStorage.setItem('ACCESS_TOKEN', response.data?.token || '');
 
         this.authService.setUser(response.data || null);
@@ -46,8 +45,7 @@ export class LoginComponent {
         this.router.navigate(['dashboard']);
       },
       error: (err) => {
-        console.log(err.message);
-        this.notif.show(err.message, 'error');
+        this.notif.show(err.error.errors, 'error');
       },
     });
   }

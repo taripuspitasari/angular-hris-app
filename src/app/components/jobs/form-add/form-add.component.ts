@@ -41,7 +41,6 @@ export class FormAddComponent {
   ngOnInit() {
     if (this.jobToEdit) {
       this.newJobForm.patchValue(this.jobToEdit);
-      console.log('dari form', this.jobToEdit);
     }
   }
 
@@ -67,8 +66,6 @@ export class FormAddComponent {
       const data = { ...this.newJobForm.value, expiry_date: formatattedDate };
       this.jobAdded.emit(data);
     }
-
-    // this.newJobForm.reset();
   }
 
   isInvalid(controlName: string) {

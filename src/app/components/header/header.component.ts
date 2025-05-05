@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/security/auth.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { User } from '../../types/models/user';
 
 @Component({
   selector: 'app-header',
@@ -14,20 +15,23 @@ export class HeaderComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  user = toSignal(this.authService.currentUser$, { initialValue: null });
-  role = computed(() => this.user()?.role);
+  // user = toSignal(this.authService.currentUser$, { initialValue: null });
+  // role = computed(() => this.user()?.role);
+
+  user = signal<User | null>(null);
+
+  ngOnInit() {
+    this.user.set(this.authService.getUser());
+  }
 
   onLogout() {
     this.authService.logoutUser().subscribe({
       next: (response) => {
-        console.log(response.message);
         localStorage.removeItem('ACCESS_TOKEN');
         this.authService.setUser(null);
         this.router.navigate(['/login']);
       },
-      error: (err) => {
-        console.log(err);
-      },
+      error: (err) => {},
     });
   }
 }
