@@ -15,9 +15,6 @@ export class HeaderComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  // user = toSignal(this.authService.currentUser$, { initialValue: null });
-  // role = computed(() => this.user()?.role);
-
   user = signal<User | null>(null);
 
   ngOnInit() {

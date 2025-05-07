@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/security/auth.service';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { User } from '../../types/models/user';
@@ -20,9 +20,6 @@ export class DefaultLayoutComponent {
   user = signal<User | null>(null);
 
   ngOnInit() {
-    // this.authService.currentUser$.subscribe((user) => {
-    //   this.user.set(user);
-    // });
     this.user.set(this.authService.getUser());
   }
 

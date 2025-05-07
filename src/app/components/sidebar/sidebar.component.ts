@@ -2,7 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../services/security/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { NotificationService } from '../../services/utils/notification.service';
 import { User } from '../../types/models/user';
 
@@ -18,23 +17,12 @@ export class SidebarComponent {
   public showSidebar = true;
   protected notif = inject(NotificationService);
 
-  // user = toSignal(this.authService.currentUser$, { initialValue: null });
   user = signal<User | null>(null);
 
   constructor() {}
 
   ngOnInit() {
     this.user.set(this.authService.getUser());
-    // if (localStorage.getItem('ACCESS_TOKEN')) {
-    //   this.authService.getCurrentUser().subscribe({
-    //     next: (response) => {
-    //       this.authService.setUser(response.data || null);
-    //     },
-    //     error: (err) => {
-    //       this.notif.show(err.error.errors, 'error');
-    //     },
-    //   });
-    // }
   }
 
   openSidebar() {

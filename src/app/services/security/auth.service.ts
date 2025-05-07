@@ -11,9 +11,6 @@ import { BaseApiResponse } from '../../types/api/baseApi';
   providedIn: 'root',
 })
 export class AuthService {
-  // private userSubject = new BehaviorSubject<User | null>(null);
-  // currentUser$ = this.userSubject.asObservable();
-
   constructor(private http: HttpClient) {}
 
   registerUser(data: RegisterRequest): Observable<BaseApiResponse<Auth>> {
@@ -41,16 +38,6 @@ export class AuthService {
       `${environment.apiUrl}/users/current`
     );
   }
-
-  // setUser(data: Auth | null): void {
-  //   const user = data ? { ...data } : null;
-  //   if (user) {
-  //     delete user.token;
-  //     localStorage.setItem('USER', JSON.stringify(user));
-  //   }
-
-  //   this.userSubject.next(user);
-  // }
 
   setUser(data: Auth | null): void {
     if (data) {

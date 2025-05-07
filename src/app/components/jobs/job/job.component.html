@@ -40,13 +40,13 @@
     <p>{{ job.salary_range }}</p>
     <p>{{ job.location }}</p>
   </div>
-  @if(user()?.role === 'APPLICANT'){
+  @if(user()?.role === 'APPLICANT' || user() === null){
   <button
     class="bg-primary-500 hover:bg-primary-600 px-3 py-1 rounded cursor-pointer w-full border border-primary-500 text-white font-medium disabled:bg-primary-400"
   >
     Apply
   </button>
-  } @if(user()?.role !== 'APPLICANT'){
+  } @else if(user()?.role !== 'APPLICANT'){
   <div class="w-full grid grid-cols-2 gap-2">
     <button
       class="bg-lime-600 hover:bg-lime-700 px-3 py-1 rounded cursor-pointer text-white font-medium disabled:bg-primary-400"
