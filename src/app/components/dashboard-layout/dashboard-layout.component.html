@@ -1,0 +1,45 @@
+<div class="bg-fuchsia-50 min-h-screen flex flex-col">
+  <header class="bg-gradient shadow-lg">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a
+        routerLink="/dashboard"
+        class="flex items-center hover:opacity-90 transition-opacity duration-200"
+      >
+        <i class="fas fa-address-book text-fuchsia-900 text-2xl mr-3"></i>
+        <div class="text-fuchsia-900 font-bold text-xl">
+          Human Resource Information Systems
+        </div>
+      </a>
+      <nav>
+        <ul class="flex space-x-6">
+          <li>
+            <a
+              routerLink="/dashboard/users/profile"
+              class="text-fuchsia-900 hover:text-fuchsia-600 flex items-center transition-colors duration-200"
+            >
+              <i class="fas fa-user-circle mr-2"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li>
+            <button
+              class="text-fuchsia-900 hover:text-fuchsia-600 flex items-center transition-colors duration-200"
+              (click)="logout()"
+            >
+              <i class="fas fa-sign-out-alt mr-2"></i>
+              <span>Logout</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container mx-auto px-4 py-8 flex-grow">
+    <router-outlet />
+    <div
+      className="mt-10 mb-6 text-center text-gray-400 text-sm animate-fade-in"
+    >
+      <p>© 2025 HRIS. All rights reserved.</p>
+    </div>
+  </main>
+</div>
