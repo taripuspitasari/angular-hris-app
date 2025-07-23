@@ -7,6 +7,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ import {
 export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
+  private notification = inject(NotificationService);
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -24,14 +26,14 @@ export class LoginComponent {
   });
 
   login() {
-    console.log(this.loginForm.value);
     this.authService.loginUser(this.loginForm.value).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.data?.token ?? '');
+        this.notification.show(response.message, 'success', 3000);
         this.router.navigate(['dashboard']);
       },
       error: (err) => {
-        console.log(err.error.errors);
+        this.notification.show(err.error.errors, 'error', 5000);
       },
     });
   }

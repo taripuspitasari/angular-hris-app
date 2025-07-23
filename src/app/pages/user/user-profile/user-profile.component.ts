@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UpdateUser } from '../../../interfaces/model/user';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,6 +16,8 @@ import { UpdateUser } from '../../../interfaces/model/user';
   styleUrl: './user-profile.component.css',
 })
 export class UserProfileComponent {
+  private notification = inject(NotificationService);
+
   updateProfileForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl('', Validators.email),
@@ -40,10 +43,10 @@ export class UserProfileComponent {
       .updateCurrentUser(this.updateProfileForm.value as UpdateUser)
       .subscribe({
         next: (response) => {
-          console.log(response.message);
+          this.notification.show(response.message, 'success', 3000);
         },
         error: (err) => {
-          console.log(err.error.errros);
+          this.notification.show(err.error.errors, 'error', 5000);
         },
       });
   }
@@ -52,8 +55,10 @@ export class UserProfileComponent {
     if (
       this.updatePasswordForm.value.newPassword !==
       this.updatePasswordForm.value.confirmNewPassword
-    )
+    ) {
+      this.notification.show('Passwords do not match.', 'error', 5000);
       return;
+    }
 
     this.authService
       .updateCurrentUser({
@@ -61,10 +66,10 @@ export class UserProfileComponent {
       } as UpdateUser)
       .subscribe({
         next: (response) => {
-          console.log(response.message);
+          this.notification.show(response.message, 'success', 3000);
         },
         error: (err) => {
-          console.log(err.error.errros);
+          this.notification.show(err.error.errors, 'error', 5000);
         },
       });
   }
@@ -79,7 +84,7 @@ export class UserProfileComponent {
           });
         },
         error: (err) => {
-          console.log(err.error.errors);
+          this.notification.show(err.error.errors, 'error', 5000);
         },
       });
     });

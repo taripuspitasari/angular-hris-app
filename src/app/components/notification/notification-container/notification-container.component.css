@@ -1,0 +1,9 @@
+.notification-container {
+  position: fixed; /* Membuat notifikasi tetap di posisinya meskipun ada scrolling */
+  top: 20px; /* Jarak dari atas */
+  right: 20px; /* Jarak dari kanan */
+  z-index: 9999; /* Pastikan notifikasi selalu di atas elemen lain */
+  display: flex;
+  flex-direction: column; /* Notifikasi akan menumpuk dari atas ke bawah */
+  align-items: flex-end; /* Notifikasi rata kanan */
+}

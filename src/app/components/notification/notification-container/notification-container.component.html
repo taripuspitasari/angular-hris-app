@@ -1,0 +1,9 @@
+<div class="notification-container">
+  <app-notification-item
+    *ngFor="let notification of notifications$ | async; trackBy: trackById"
+    [message]="notification.message"
+    [type]="notification.type"
+    [duration]="notification.duration ?? 0"
+    (closeNotification)="removeNotification(notification.id)"
+  ></app-notification-item>
+</div>

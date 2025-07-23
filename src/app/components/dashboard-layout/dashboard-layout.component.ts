@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -11,15 +12,16 @@ import { AuthService } from '../../services/auth.service';
 export class DashboardLayoutComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
+  private notification = inject(NotificationService);
 
   logout() {
     this.authService.logoutUser().subscribe({
       next: (response) => {
-        console.log(response.message);
         this.router.navigate(['/login']);
+        this.notification.show(response.message, 'success', 3000);
       },
       error: (err) => {
-        console.log(err.error.errros);
+        this.notification.show(err.error.errors, 'error', 5000);
       },
     });
   }
