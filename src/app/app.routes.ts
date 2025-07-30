@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { DashboardLayoutComponent } from './components/dashboard-layout/dashboard-layout.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 import { authGuard } from './core/auth.guard';
+import { AttendanceComponent } from './pages/attendance/attendance.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
             component: UserProfileComponent,
           },
         ],
+      },
+      {
+        path: 'attendance',
+        component: AttendanceComponent,
       },
     ],
   },

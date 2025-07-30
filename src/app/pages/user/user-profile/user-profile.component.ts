@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import {
   ReactiveFormsModule,
@@ -74,19 +74,17 @@ export class UserProfileComponent {
       });
   }
 
-  constructor() {
-    effect(() => {
-      this.authService.getCurrentUser().subscribe({
-        next: (response) => {
-          this.updateProfileForm.patchValue({
-            name: response.data?.name,
-            email: response.data?.email,
-          });
-        },
-        error: (err) => {
-          this.notification.show(err.error.errors, 'error', 5000);
-        },
-      });
+  ngOnInit(): void {
+    this.authService.getCurrentUser().subscribe({
+      next: (response) => {
+        this.updateProfileForm.patchValue({
+          name: response.data?.name,
+          email: response.data?.email,
+        });
+      },
+      error: (err) => {
+        this.notification.show(err.error.errors, 'error', 5000);
+      },
     });
   }
 }
