@@ -1,15 +1,13 @@
-<div class="bg-fuchsia-50 min-h-screen flex flex-col">
+<div class="bg-fuchsia-50 min-h-screen flex flex-col relative">
   <header class="bg-gradient shadow-lg">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <a
-        routerLink="/dashboard"
+    <div class="container mx-auto py-4 flex justify-between items-center">
+      <div
         class="flex items-center hover:opacity-90 transition-opacity duration-200"
       >
-        <i class="fas fa-address-book text-fuchsia-900 text-2xl mr-3"></i>
-        <div class="text-fuchsia-900 font-bold text-xl">
+        <a routerLink="/dashboard" class="text-fuchsia-900 font-bold text-xl">
           Human Resource Information Systems
-        </div>
-      </a>
+        </a>
+      </div>
       <nav>
         <ul class="flex space-x-6">
           <li>
@@ -21,7 +19,7 @@
               <span>Profile</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <button
               class="text-fuchsia-900 hover:text-fuchsia-600 flex items-center transition-colors duration-200"
               (click)="logout()"
@@ -29,17 +27,53 @@
               <i class="fas fa-sign-out-alt mr-2"></i>
               <span>Logout</span>
             </button>
-          </li>
+          </li> -->
         </ul>
       </nav>
     </div>
   </header>
-  <main class="container mx-auto px-4 py-8 flex-grow">
-    <router-outlet />
-    <div
-      className="mt-10 mb-6 text-center text-gray-400 text-sm animate-fade-in"
-    >
-      <p>© 2025 HRIS. All rights reserved.</p>
+  <main class="flex">
+    <!-- sidebar -->
+    <div class="w-52 text-fuchsia-900 flex flex-col p-4">
+      <h1 class="font-medium px-4 my-4 text-gray-400">Main Menu</h1>
+      <nav class="flex-1 space-y-4">
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="bg-gray-700"
+          class="block px-4 py-2 rounded-lg hover:bg-fuchsia-200 hover:font-bold transition"
+        >
+          Home
+        </a>
+        <a
+          routerLink="attendance"
+          routerLinkActive="bg-gray-700"
+          class="block px-4 py-2 rounded-lg hover:bg-fuchsia-200 hover:font-bold transition"
+        >
+          Attendance
+        </a>
+        <a
+          routerLink="department"
+          routerLinkActive="bg-gray-700"
+          class="block px-4 py-2 rounded-lg hover:bg-fuchsia-200 hover:font-bold transition"
+        >
+          Department
+        </a>
+        <button
+          (click)="logout()"
+          class="block px-4 py-2 rounded-lg hover:bg-fuchsia-200 hover:font-bold transition w-full text-left"
+        >
+          Logout
+        </button>
+      </nav>
+    </div>
+    <!-- end of sidebar -->
+    <div class="mx-auto px-4 py-8 flex-grow">
+      <router-outlet />
+      <div
+        className="mt-10 mb-6 text-center text-gray-400 text-sm animate-fade-in"
+      >
+        <p>© 2025 HRIS. All rights reserved.</p>
+      </div>
     </div>
   </main>
 </div>
