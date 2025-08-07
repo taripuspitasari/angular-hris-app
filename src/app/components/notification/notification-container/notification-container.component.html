@@ -1,4 +1,6 @@
-<div class="notification-container">
+<div
+  class="fixed top-4 left-1/2 z-50 flex flex-col items-center -translate-x-1/2"
+>
   <app-notification-item
     *ngFor="let notification of notifications$ | async; trackBy: trackById"
     [message]="notification.message"

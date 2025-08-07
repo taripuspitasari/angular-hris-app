@@ -1,4 +1,22 @@
-<div class="notification" [ngClass]="type">
-  <span>{{ message }}</span>
-  <button class="close-btn" (click)="close()">X</button>
+<div
+  class="py-3 px-5 mb-2.5 rounded-lg flex justify-between items-center shadow-md min-w-80 border animate-fadeIn"
+  [ngClass]="
+    type === 'success'
+      ? 'bg-emerald-50 text-emerald-500'
+      : 'bg-rose-50 text-rose-500'
+  "
+>
+  <span
+    ><i
+      class="fa-solid mr-2 text-inherit"
+      [ngClass]="type === 'success' ? 'fa-circle-check' : 'fa-circle-xmark'"
+    ></i
+    >{{ message }}</span
+  >
+  <button
+    class="bg-none border-none text-md cursor-pointer text-inherit ml-4"
+    (click)="close()"
+  >
+    X
+  </button>
 </div>

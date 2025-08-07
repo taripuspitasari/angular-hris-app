@@ -27,4 +27,6 @@ export class NotificationContainerComponent implements OnInit {
   trackById(index: number, notification: Notification): number {
     return notification.id;
   }
+
+  noop() {}
 }
