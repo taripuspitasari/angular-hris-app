@@ -6,6 +6,10 @@ import { DashboardLayoutComponent } from './components/dashboard-layout/dashboar
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 import { authGuard } from './core/auth.guard';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
+import { DepartmentComponent } from './pages/department/department.component';
+import { DepartmentCreateComponent } from './components/department/department-create/department-create.component';
+import { DepartmentEditComponent } from './components/department/department-edit/department-edit.component';
+import { DepartmentDetailComponent } from './components/department/department-detail/department-detail.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +43,24 @@ export const routes: Routes = [
       {
         path: 'attendance',
         component: AttendanceComponent,
+      },
+      {
+        path: 'department',
+        component: DepartmentComponent,
+        children: [
+          {
+            path: 'create',
+            component: DepartmentCreateComponent,
+          },
+          {
+            path: 'edit',
+            component: DepartmentEditComponent,
+          },
+          {
+            path: 'detail',
+            component: DepartmentDetailComponent,
+          },
+        ],
       },
     ],
   },

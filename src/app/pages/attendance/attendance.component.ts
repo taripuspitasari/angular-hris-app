@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { Attendance } from '../../interfaces/model/attendance';
 import { AttendanceService } from '../../services/attendance.service';
 import { NotificationService } from '../../services/notification.service';
@@ -7,7 +6,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-attendance',
-  imports: [RouterLink, DatePipe, CommonModule],
+  imports: [DatePipe, CommonModule],
   templateUrl: './attendance.component.html',
   styleUrl: './attendance.component.css',
 })

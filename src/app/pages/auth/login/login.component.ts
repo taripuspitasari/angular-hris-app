@@ -8,10 +8,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { NotificationService } from '../../../services/notification.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -19,6 +20,9 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private notification = inject(NotificationService);
+  showPassword: boolean = false;
+  emailError: string = '';
+  passwordError: string = '';
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -33,8 +37,29 @@ export class LoginComponent {
         this.router.navigate(['dashboard']);
       },
       error: (err) => {
-        this.notification.show(err.error.errors, 'error', 5000);
+        this.emailError = '';
+        this.passwordError = '';
+
+        const validationErrors = err.error.errors;
+        if (Array.isArray(validationErrors)) {
+          validationErrors.forEach((errorItem: any) => {
+            console.log(errorItem);
+            if (errorItem.path?.[0] === 'email') {
+              this.emailError = errorItem.message;
+            }
+            if (errorItem.path?.[0] === 'password') {
+              this.passwordError = errorItem.message.split(':')[1].trim();
+            }
+          });
+        }
+        if (typeof validationErrors === 'string') {
+          this.notification.show(validationErrors, 'error', 5000);
+        }
       },
     });
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }
