@@ -1,4 +1,4 @@
-<div class="bg-fuchsia-50 min-h-screen flex flex-col relative">
+<div class="bg-fuchsia-50 min-h-screen flex flex-col relative max-w-full">
   <header class="bg-gradient shadow-lg">
     <div class="container mx-auto py-4 flex justify-between items-center">
       <div
@@ -37,7 +37,7 @@
   </header>
   <main class="flex">
     <!-- sidebar -->
-    <div class="w-52 text-fuchsia-900 flex flex-col p-4">
+    <div class="w-52 text-fuchsia-900 md:flex flex-col p-4 hidden">
       <h1 class="font-medium px-4 my-4 text-gray-400">Main Menu</h1>
       <nav class="flex-1 space-y-4">
         <a
@@ -72,10 +72,8 @@
     <!-- end of sidebar -->
     <div class="mx-auto px-4 py-8 flex-grow">
       <router-outlet />
-      <div
-        className="mt-10 mb-6 text-center text-gray-400 text-sm animate-fade-in"
-      >
-        <p>© 2025 HRIS. All rights reserved.</p>
+      <div class="mt-10 mb-6 text-center text-gray-400 text-sm">
+        <p>© 2025 STAFFY. All rights reserved.</p>
       </div>
     </div>
   </main>
