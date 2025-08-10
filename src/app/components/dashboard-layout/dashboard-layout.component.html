@@ -42,21 +42,22 @@
       <nav class="flex-1 space-y-4">
         <a
           routerLink="/dashboard"
-          routerLinkActive="bg-gray-700"
+          routerLinkActive="bg-fuchsia-200 font-bold"
+          [routerLinkActiveOptions]="{ exact: true }"
           class="block px-4 py-2 rounded-lg hover:bg-fuchsia-200 hover:font-bold transition"
         >
           Home
         </a>
         <a
           routerLink="attendance"
-          routerLinkActive="bg-gray-700"
+          routerLinkActive="bg-fuchsia-200 font-bold"
           class="block px-4 py-2 rounded-lg hover:bg-fuchsia-200 hover:font-bold transition"
         >
           Attendance
         </a>
         <a
           routerLink="department"
-          routerLinkActive="bg-gray-700"
+          routerLinkActive="bg-fuchsia-200 font-bold"
           class="block px-4 py-2 rounded-lg hover:bg-fuchsia-200 hover:font-bold transition"
         >
           Department
@@ -72,7 +73,7 @@
     <!-- end of sidebar -->
     <div class="mx-auto px-4 py-8 flex-grow">
       <router-outlet />
-      <div class="mt-10 mb-6 text-center text-gray-400 text-sm">
+      <div class="mt-10 mb-4 text-center text-gray-400 text-sm">
         <p>© 2025 STAFFY. All rights reserved.</p>
       </div>
     </div>

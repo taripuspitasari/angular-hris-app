@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterModule],
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.css',
 })

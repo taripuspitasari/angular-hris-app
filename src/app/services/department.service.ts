@@ -21,16 +21,10 @@ export class DepartmentService {
     );
   }
 
-  // getDepartments(params: any): Observable<PaginatedApi<Department>> {
-  //   return this.http.get<PaginatedApi<Department>>(
-  //     `${environment.apiUrl}/departments/`,
-  //     { params }
-  //   );
-  // }
-
-  getDepartments(): Observable<PaginatedApi<Department>> {
+  getDepartments(params?: any): Observable<PaginatedApi<Department>> {
     return this.http.get<PaginatedApi<Department>>(
-      `${environment.apiUrl}/departments/`
+      `${environment.apiUrl}/departments/`,
+      { params }
     );
   }
 

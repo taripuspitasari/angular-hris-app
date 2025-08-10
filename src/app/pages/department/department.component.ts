@@ -34,8 +34,12 @@ export class DepartmentComponent {
     description: new FormControl('', Validators.required),
   });
 
-  getDepartments() {
-    this.departmentService.getDepartments().subscribe({
+  searchForm = new FormGroup({
+    name: new FormControl(''),
+  });
+
+  getDepartments(params?: any) {
+    this.departmentService.getDepartments(params).subscribe({
       next: (response) => {
         this.departments = response.data;
       },
@@ -49,6 +53,13 @@ export class DepartmentComponent {
     this.getDepartments();
   }
 
+  search() {
+    this.getDepartments(
+      this.searchForm.value.name?.trim()
+        ? { name: this.searchForm.value.name }
+        : {}
+    );
+  }
   create() {
     this.departmentService
       .create(this.createForm.value as CreateDepartment)
