@@ -1,5 +1,5 @@
 <div class="bg-fuchsia-50 min-h-screen flex flex-col relative max-w-full">
-  <header class="bg-gradient shadow-lg">
+  <header class="bg-gradient shadow-lg px-2">
     <div class="container mx-auto py-4 flex justify-between items-center">
       <div
         class="flex items-center hover:opacity-90 transition-opacity duration-200"
@@ -61,6 +61,14 @@
           class="block px-4 py-2 rounded-lg hover:bg-fuchsia-200 hover:font-bold transition"
         >
           Department
+        </a>
+        <a
+          routerLink="users"
+          routerLinkActive="bg-fuchsia-200 font-bold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="block px-4 py-2 rounded-lg hover:bg-fuchsia-200 hover:font-bold transition"
+        >
+          User
         </a>
         <button
           (click)="logout()"

@@ -44,7 +44,7 @@ export class DepartmentComponent {
         this.departments = response.data;
       },
       error: (err) => {
-        this.notification.show(err.error.errrors, 'error', 5000);
+        this.notification.show(err.error.errors, 'error', 5000);
       },
     });
   }

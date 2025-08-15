@@ -3,10 +3,11 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { DashboardLayoutComponent } from './components/dashboard-layout/dashboard-layout.component';
-import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
+import { UserProfileComponent } from './pages/auth/user-profile/user-profile.component';
 import { authGuard } from './core/auth.guard';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { DepartmentComponent } from './pages/department/department.component';
+import { UserComponent } from './pages/user/user.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
       {
         path: 'users',
         children: [
+          {
+            path: '',
+            component: UserComponent,
+          },
           {
             path: 'profile',
             component: UserProfileComponent,
