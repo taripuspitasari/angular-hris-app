@@ -5,12 +5,12 @@ import { NotificationService } from '../../services/notification.service';
 import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-attendance',
+  selector: 'app-home',
   imports: [DatePipe, CommonModule],
-  templateUrl: './attendance.component.html',
-  styleUrl: './attendance.component.css',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
 })
-export class AttendanceComponent {
+export class HomeComponent {
   attendanceToday: Attendance | null = null;
   attendaceHistory: Attendance[] = [];
   todayDate: string = '';

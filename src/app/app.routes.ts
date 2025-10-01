@@ -8,6 +8,8 @@ import { authGuard } from './core/auth.guard';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { DepartmentComponent } from './pages/department/department.component';
 import { UserComponent } from './pages/user/user.component';
+import { EmployeeComponent } from './pages/employee/employee.component';
+import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
   {
@@ -49,6 +51,14 @@ export const routes: Routes = [
       {
         path: 'department',
         component: DepartmentComponent,
+      },
+      {
+        path: 'employees',
+        component: EmployeeComponent,
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
       },
     ],
   },

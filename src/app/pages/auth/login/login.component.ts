@@ -34,7 +34,7 @@ export class LoginComponent {
       next: (response) => {
         localStorage.setItem('token', response.data?.token ?? '');
         this.notification.show(response.message, 'success', 3000);
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['dashboard/home']);
       },
       error: (err) => {
         this.emailError = '';

@@ -2,17 +2,24 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.css',
 })
 export class DashboardLayoutComponent {
+  sidebarOpen = false;
+
   private authService = inject(AuthService);
   private router = inject(Router);
   private notification = inject(NotificationService);
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
 
   logout() {
     this.authService.logoutUser().subscribe({

@@ -14,15 +14,23 @@ import {
   Department,
   UpdateDepartment,
 } from '../../interfaces/model/department';
+import { ModalComponent } from '../../components/modal/modal.component';
 
 @Component({
   selector: 'app-department',
-  imports: [RouterModule, DepartmentItemComponent, ReactiveFormsModule],
+  imports: [
+    RouterModule,
+    DepartmentItemComponent,
+    ReactiveFormsModule,
+    ModalComponent,
+  ],
   templateUrl: './department.component.html',
   styleUrl: './department.component.css',
 })
 export class DepartmentComponent {
   departments: Department[] = [];
+  isDelete: boolean = false;
+  selectedDepartment: Department | null = null;
 
   private departmentService = inject(DepartmentService);
   private notification = inject(NotificationService);
@@ -60,6 +68,7 @@ export class DepartmentComponent {
         : {}
     );
   }
+
   create() {
     this.departmentService
       .create(this.createForm.value as CreateDepartment)
@@ -91,12 +100,15 @@ export class DepartmentComponent {
       });
   }
 
-  delete(department: Department) {
-    this.departmentService.delete(department.id).subscribe({
+  delete() {
+    if (!this.selectedDepartment) return;
+
+    this.departmentService.delete(this.selectedDepartment.id).subscribe({
       next: (response) => {
         this.notification.show(response.message, 'success', 3000);
         this.getDepartments();
         this.createForm.reset();
+        this.closeDeleteModal();
       },
       error: (err) => {
         const validationErrors = err.error.errors;
@@ -105,6 +117,16 @@ export class DepartmentComponent {
         }
       },
     });
+  }
+
+  openDeleteModal(department: Department) {
+    this.selectedDepartment = department;
+    this.isDelete = true;
+  }
+
+  closeDeleteModal() {
+    this.isDelete = false;
+    this.selectedDepartment = null;
   }
 
   update(department: UpdateDepartment) {

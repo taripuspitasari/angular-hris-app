@@ -1,0 +1,50 @@
+<div
+  class="bg-white rounded-lg shadow-sm overflow-hidden text-gray-600 transition duration-300 hover:shadow-xl"
+>
+  <div class="p-6">
+    <a
+      routerLink="detail"
+      class="block cursor-pointer rounded-lg transition-all duration-200 p-3 space-y-3"
+    >
+      <div class="flex flex-col justify-center mb-3">
+        <h2 class="text-xl font-semibold transition-colors duration-200">
+          {{ employee.user.name }}
+        </h2>
+        <h2 class="text-gray-400 transition-colors duration-200">
+          {{ employee.position }}
+        </h2>
+      </div>
+      <div class="flex justify-between">
+        <p class="flex flex-col justify-center">
+          <span class="text-gray-400">Department</span>
+          <span class="font-medium w-24">{{ employee.department.name }}</span>
+        </p>
+        <p class="flex flex-col justify-center">
+          <span class="text-gray-400">Hired Date</span>
+          <span class="font-medium w-24">{{
+            employee.join_date | date : "shortDate"
+          }}</span>
+        </p>
+      </div>
+      <div class="space-y-3">
+        <p class="flex items-center">
+          <span class="font-medium">{{ employee.user.email }}</span>
+        </p>
+      </div>
+    </a>
+    <div class="mt-4 flex justify-end space-x-3">
+      <button
+        (click)="edit.emit()"
+        type="button"
+        class="px-4 py-2 cursor-pointer bg-emerald-500 text-gray-100 rounded-lg hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 transition-all duration-200 font-medium shadow-md flex items-center"
+      >
+        <i class="fas fa-edit mr-2"></i> Edit
+      </button>
+      <button
+        class="px-4 py-2 bg-rose-500 cursor-pointer text-gray-100 rounded-lg hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all duration-200 font-medium shadow-md flex items-center"
+      >
+        <i class="fas fa-trash-alt mr-2"></i> Delete
+      </button>
+    </div>
+  </div>
+</div>
