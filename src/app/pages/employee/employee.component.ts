@@ -41,14 +41,13 @@ export class EmployeeComponent {
   searchForm = new FormGroup({
     name: new FormControl(''),
     status: new FormControl(''),
-    department_id: new FormControl(''),
+    department_id: new FormControl(0),
   });
 
   getEmployees(params?: any) {
     this.employeeService.getEmployees(params).subscribe({
       next: (response) => {
         this.employees = response.data;
-        console.log(this.employees);
       },
       error: (err) => {
         console.log(err.error.errors);
@@ -73,14 +72,7 @@ export class EmployeeComponent {
   }
 
   search() {
-    const { name, status, department_id } = this.searchForm.value;
-
-    const params: any = {};
-
-    if (name) params.name = name;
-    if (status) params.status = status;
-    if (department_id) params.department_id = department_id; // hanya dikirim kalau ada
-
+    const params = this.searchForm.value;
     this.getEmployees(params);
   }
 
