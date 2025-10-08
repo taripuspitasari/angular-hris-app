@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseApi, PaginatedApi } from '../interfaces/api/base-api';
-import { User } from '../interfaces/model/user';
+import { UpdateStatusUser, User } from '../interfaces/model/user';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -15,10 +15,20 @@ export class UserService {
     return this.http.get<BaseApi<User>>(`${environment.apiUrl}/hr/users/${id}`);
   }
 
-  getUsers(params?: any): Observable<PaginatedApi<User>> {
+  getUsers(params: any = {}): Observable<PaginatedApi<User>> {
+    let httpParams = new HttpParams();
+    if (params.name) httpParams = httpParams.set('name', params.name);
+    if (params.role) httpParams = httpParams.set('role', params.role);
     return this.http.get<PaginatedApi<User>>(
       `${environment.apiUrl}/hr/users/`,
-      { params }
+      { params: httpParams }
+    );
+  }
+
+  update(data: UpdateStatusUser): Observable<BaseApi<User>> {
+    return this.http.put<BaseApi<User>>(
+      `${environment.apiUrl}/hr/users/${data.id}`,
+      data
     );
   }
 }

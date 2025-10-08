@@ -2,24 +2,49 @@
   <h1 class="text-2xl font-medium text-fuchsia-950 flex items-center">User</h1>
 </div>
 
-<div class="w-full grid grid-cols-1 lg:grid-cols-3 mb-4 gap-6">
-  <form class="lg:col-start-2">
-    <div
-      class="flex w-full py-1.5 pl-3 pr-1 bg-white rounded-md shadow-sm bg-opacity-50 text-gray-600"
-    >
-      <input
-        type="text"
-        class="focus:outline-none w-full placeholder:text-gray-300"
-        formControlName="name"
-        placeholder="Search"
-      />
-      <button
-        type="submit"
-        class="bg-fuchsia-600 text-white px-4 py-2 rounded-lg hover:opacity-90 focus:outline-none focus:ring-1 focus:ring-fuchsia-500 focus:border-fuchsia-500 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5"
-      >
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
+<div class="w-full mb-4">
+  <form
+    [formGroup]="searchForm"
+    (submit)="search()"
+    class="flex flex-col md:flex-row gap-2 justify-between"
+  >
+    <div class="flex flex-col md:flex-row gap-2">
+      <div class="relative">
+        <div
+          class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+        >
+          <i class="fa-solid fa-magnifying-glass text-gray-300"></i>
+        </div>
+        <input
+          type="text"
+          class="focus:outline-none w-full placeholder:text-gray-300 border border-gray-300 pl-10 pr-3 py-1.5 rounded-lg"
+          formControlName="name"
+          placeholder="Search"
+        />
+      </div>
+      <div class="relative md:w-44">
+        <select
+          id="role"
+          formControlName="role"
+          class="w-full px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none transition-all duration-200 appearance-none"
+        >
+          <option value="">All Role</option>
+          <option value="employee">Employee</option>
+          <option value="applicant">Applicant</option>
+        </select>
+        <div
+          class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+        >
+          <i class="fa-solid fa-chevron-down text-gray-400"></i>
+        </div>
+      </div>
     </div>
+    <button
+      type="submit"
+      class="bg-fuchsia-600 text-white px-5 py-1.5 rounded-lg hover:opacity-90 focus:outline-none focus:ring-1 focus:ring-fuchsia-500 focus:border-fuchsia-500 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5"
+    >
+      Search
+    </button>
   </form>
 </div>
 
@@ -31,9 +56,7 @@
         <th class="px-4 py-2">Name</th>
         <th class="px-4 py-2">Role</th>
         <th class="px-4 py-2">Email</th>
-        <th class="px-4 py-2 text-center">
-          <i class="fa-solid fa-ellipsis text-gray-400"></i>
-        </th>
+        <th class="px-4 py-2 text-center">Active</th>
       </tr>
     </thead>
     <tbody>
@@ -53,18 +76,15 @@
         <td
           class="px-4 py-2 flex flex-row gap-2 justify-center items-center h-full text-gray-500"
         >
-          <!-- edit -->
           <div
-            (click)="openCreateModal(user)"
-            class="hover:bg-green-100 px-2.5 py-1 rounded hover:text-green-500"
+            (click)="toggleActive(user)"
+            class="px-2.5 py-1 rounded transition-colors duration-300 ease-in-out"
+            [ngClass]="{
+              'text-green-500': user.is_active,
+              'text-gray-500 rotate-180': user.is_active
+            }"
           >
-            <i class="fa-solid fa-pen text-xs"></i>
-          </div>
-          <!-- delete -->
-          <div
-            class="hover:bg-rose-100 px-2.5 py-1 rounded hover:text-rose-500"
-          >
-            <i class="fa-solid fa-trash text-xs"></i>
+            <i class="fa-solid fa-toggle-on"></i>
           </div>
         </td>
       </tr>
@@ -73,10 +93,16 @@
   </table>
 </div>
 
-@if(isConvert){
-<app-employee-create
-  [user]="selectedUser"
-  (cancel)="closeCreateModal()"
-  (refresh)="getUsers()"
-></app-employee-create>
+@if(isUpdate) {
+<app-modal
+  title="Update Status Confirmation"
+  (cancel)="closeUpdateModal()"
+  (confirm)="update()"
+>
+  <p>
+    Are you sure you want to update status
+    <strong>{{ selectedUser?.name }}</strong
+    >?
+  </p>
+</app-modal>
 }

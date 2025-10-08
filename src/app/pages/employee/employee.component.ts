@@ -5,12 +5,7 @@ import {
   UpdateEmployee,
 } from '../../interfaces/model/employee';
 import { EmployeeService } from '../../services/employee.service';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NotificationService } from '../../services/notification.service';
 import { EmployeeEditComponent } from '../../components/employee/employee-edit/employee-edit.component';
 import { DatePipe, TitleCasePipe } from '@angular/common';
