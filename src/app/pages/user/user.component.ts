@@ -16,9 +16,19 @@ export class UserComponent {
   users: User[] = [];
   isUpdate: boolean = false;
   selectedUser: User | null = null;
+  page: number = 1;
+  totalPage: number = 1;
 
   private userService = inject(UserService);
   private notification = inject(NotificationService);
+
+  getPages() {
+    const pages = [];
+    for (let i = 1; i <= this.totalPage; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
 
   searchForm = new FormGroup({
     name: new FormControl(''),
@@ -29,6 +39,8 @@ export class UserComponent {
     this.userService.getUsers(params).subscribe({
       next: (response) => {
         this.users = response.data;
+        this.page = response.paging.current_page;
+        this.totalPage = response.paging.total_page;
       },
       error: (err) => {
         this.notification.show(err.error.errors, 'error', 5000);
@@ -72,7 +84,22 @@ export class UserComponent {
   }
 
   search() {
-    const params = this.searchForm.value;
+    const params = { ...this.searchForm.value, page: 1 };
     this.getUsers(params);
+  }
+
+  previous() {
+    this.page = this.page - 1;
+    this.getUsers({ page: this.page });
+  }
+
+  next() {
+    this.page = this.page + 1;
+    this.getUsers({ page: this.page });
+  }
+
+  changePage(value: number) {
+    this.page = value;
+    this.getUsers({ page: this.page });
   }
 }

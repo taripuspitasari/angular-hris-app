@@ -31,11 +31,21 @@ export class DepartmentComponent {
   departments: Department[] = [];
   isDelete: boolean = false;
   selectedDepartment: Department | null = null;
+  page: number = 1;
+  totalPage: number = 1;
 
   private departmentService = inject(DepartmentService);
   private notification = inject(NotificationService);
   nameError: string = '';
   descriptionError: string = '';
+
+  getPages() {
+    const pages = [];
+    for (let i = 1; i <= this.totalPage; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
 
   createForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -50,6 +60,8 @@ export class DepartmentComponent {
     this.departmentService.getDepartments(params).subscribe({
       next: (response) => {
         this.departments = response.data;
+        this.page = response.paging.current_page;
+        this.totalPage = response.paging.total_page;
       },
       error: (err) => {
         this.notification.show(err.error.errors, 'error', 5000);
@@ -62,11 +74,8 @@ export class DepartmentComponent {
   }
 
   search() {
-    this.getDepartments(
-      this.searchForm.value.name?.trim()
-        ? { name: this.searchForm.value.name }
-        : {}
-    );
+    const params = { ...this.searchForm.value, page: 1 };
+    this.getDepartments(params);
   }
 
   create() {
@@ -148,5 +157,20 @@ export class DepartmentComponent {
     this.nameError = '';
     this.descriptionError = '';
     this.createForm.reset();
+  }
+
+  previous() {
+    this.page = this.page - 1;
+    this.getDepartments({ page: this.page });
+  }
+
+  next() {
+    this.page = this.page + 1;
+    this.getDepartments({ page: this.page });
+  }
+
+  changePage(value: number) {
+    this.page = value;
+    this.getDepartments({ page: this.page });
   }
 }

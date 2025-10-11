@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -21,10 +21,13 @@ export class DepartmentService {
     );
   }
 
-  getDepartments(params?: any): Observable<PaginatedApi<Department>> {
+  getDepartments(params: any = {}): Observable<PaginatedApi<Department>> {
+    let httpParams = new HttpParams();
+    if (params.name) httpParams = httpParams.set('name', params.name);
+    if (params.page) httpParams = httpParams.set('page', params.page);
     return this.http.get<PaginatedApi<Department>>(
       `${environment.apiUrl}/departments/`,
-      { params }
+      { params: httpParams }
     );
   }
 

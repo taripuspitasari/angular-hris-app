@@ -19,6 +19,7 @@ export class UserService {
     let httpParams = new HttpParams();
     if (params.name) httpParams = httpParams.set('name', params.name);
     if (params.role) httpParams = httpParams.set('role', params.role);
+    if (params.page) httpParams = httpParams.set('page', params.page);
     return this.http.get<PaginatedApi<User>>(
       `${environment.apiUrl}/hr/users/`,
       { params: httpParams }

@@ -28,6 +28,16 @@ export class EmployeeComponent {
   departments: Department[] = [];
   isEdit: boolean = false;
   selectedEmployee: Employee | null = null;
+  page: number = 1;
+  totalPage: number = 1;
+
+  getPages() {
+    const pages = [];
+    for (let i = 1; i <= this.totalPage; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
 
   private employeeService = inject(EmployeeService);
   private departmentService = inject(DepartmentService);
@@ -43,6 +53,8 @@ export class EmployeeComponent {
     this.employeeService.getEmployees(params).subscribe({
       next: (response) => {
         this.employees = response.data;
+        this.page = response.paging.current_page;
+        this.totalPage = response.paging.total_page;
       },
       error: (err) => {
         console.log(err.error.errors);
@@ -67,7 +79,7 @@ export class EmployeeComponent {
   }
 
   search() {
-    const params = this.searchForm.value;
+    const params = { ...this.searchForm.value, page: 1 };
     this.getEmployees(params);
   }
 
@@ -79,5 +91,20 @@ export class EmployeeComponent {
   closeEditModal() {
     this.isEdit = false;
     this.selectedEmployee = null;
+  }
+
+  previous() {
+    this.page = this.page - 1;
+    this.getEmployees({ page: this.page });
+  }
+
+  next() {
+    this.page = this.page + 1;
+    this.getEmployees({ page: this.page });
+  }
+
+  changePage(value: number) {
+    this.page = value;
+    this.getEmployees({ page: this.page });
   }
 }

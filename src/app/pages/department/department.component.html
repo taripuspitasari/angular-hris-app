@@ -101,6 +101,51 @@
   }
 </div>
 
+<div class="mt-4 flex justify-center">
+  <nav class="flex items-center space-x-3 bg-fuchsia-50 rounded-xl p-3">
+    <!--  previous-->
+    @if(page > 1) {
+    <a
+      (click)="previous()"
+      class="px-4 py-2 bg-white text-fuchsia-900 rounded-lg hover:bg-fuchsia-100 focus:outline-none focus:ring-1 focus:ring-fuchsia-300 transition-all duration-200 flex items-center"
+    >
+      <i class="fas fa-chevron-left mr-2"></i> Previous
+    </a>
+    }
+
+    <!-- for page -->
+    @for(value of getPages(); track value) {
+    <!-- if active -->
+    @if(value === page) {
+    <a
+      (click)="changePage(value)"
+      class="px-4 py-2 bg-fuchsia-600 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-1 focus:ring-fuchsia-300 transition-all duration-200 font-medium shadow-md"
+    >
+      {{ value }}
+    </a>
+    }
+    <!-- if nonactive -->
+    @else {
+    <a
+      (click)="changePage(value)"
+      class="px-4 py-2 bg-white text-fuchsia-900 rounded-lg hover:bg-fuchsia-100 focus:outline-none focus:ring-1 focus:ring-fuchsia-300 transition-all duration-200 flex items-center"
+    >
+      {{ value }}
+    </a>
+    } }
+
+    <!-- next  -->
+    @if(page < totalPage) {
+    <a
+      (click)="next()"
+      class="px-4 py-2 bg-white text-fuchsia-900 rounded-lg hover:bg-fuchsia-100 focus:outline-none focus:ring-1 focus:ring-fuchsia-300 transition-all duration-200 flex items-center"
+    >
+      Next <i class="fas fa-chevron-right ml-2"></i>
+    </a>
+    }
+  </nav>
+</div>
+
 @if(isDelete){
 <app-modal
   title="Delete Confirmation"

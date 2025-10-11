@@ -26,6 +26,7 @@ export class EmployeeService {
     if (params.status) httpParams = httpParams.set('status', params.status);
     if (params.department_id)
       httpParams = httpParams.set('department_id', params.department_id);
+    if (params.page) httpParams = httpParams.set('page', params.page);
 
     return this.http.get<PaginatedApi<Employee>>(this.baseUrl, {
       params: httpParams,
