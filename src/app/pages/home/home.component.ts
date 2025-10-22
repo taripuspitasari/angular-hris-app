@@ -12,7 +12,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 })
 export class HomeComponent {
   attendanceToday: Attendance | null = null;
-  attendaceHistory: Attendance[] = [];
   todayDate: string = '';
 
   private attendance = inject(AttendanceService);
@@ -29,21 +28,9 @@ export class HomeComponent {
     });
   }
 
-  getAttendanceHistory() {
-    this.attendance.getAttendanceHistory().subscribe({
-      next: (response) => {
-        this.attendaceHistory = response.data;
-      },
-      error: (err) => {
-        this.notification.show(err.error.errors, 'error', 5000);
-      },
-    });
-  }
-
   ngOnInit(): void {
     this.todayDate = new Date().toISOString();
     this.getAttendanceToday();
-    this.getAttendanceHistory();
   }
 
   get attendanceStatus(): string {
@@ -58,7 +45,6 @@ export class HomeComponent {
       next: (response) => {
         this.attendanceToday = response.data ?? null;
         this.notification.show(response.message, 'success', 3000);
-        this.getAttendanceHistory();
       },
       error: (err) => {
         this.notification.show(err.error.errors, 'error', 5000);
@@ -71,7 +57,6 @@ export class HomeComponent {
       next: (response) => {
         this.attendanceToday = response.data ?? null;
         this.notification.show(response.message, 'success', 3000);
-        this.getAttendanceHistory();
       },
       error: (err) => {
         this.notification.show(err.error.errors, 'error', 5000);

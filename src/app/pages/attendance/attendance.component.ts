@@ -11,28 +11,27 @@ import { CommonModule, DatePipe } from '@angular/common';
   styleUrl: './attendance.component.css',
 })
 export class AttendanceComponent {
-  attendanceToday: Attendance | null = null;
   attendaceHistory: Attendance[] = [];
-  todayDate: string = '';
+  page: number = 1;
+  totalPage: number = 1;
+
+  getPages() {
+    const pages = [];
+    for (let i = 1; i <= this.totalPage; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
 
   private attendance = inject(AttendanceService);
   private notification = inject(NotificationService);
 
-  getAttendanceToday() {
-    this.attendance.getAttendance().subscribe({
-      next: (response) => {
-        this.attendanceToday = response.data ?? null;
-      },
-      error: (err) => {
-        this.notification.show(err.error.errors, 'error', 5000);
-      },
-    });
-  }
-
-  getAttendanceHistory() {
-    this.attendance.getAttendanceHistory().subscribe({
+  getAttendanceHistory(params?: any) {
+    this.attendance.getAttendanceHistory(params).subscribe({
       next: (response) => {
         this.attendaceHistory = response.data;
+        this.page = response.paging.current_page;
+        this.totalPage = response.paging.total_page;
       },
       error: (err) => {
         this.notification.show(err.error.errors, 'error', 5000);
@@ -41,41 +40,21 @@ export class AttendanceComponent {
   }
 
   ngOnInit(): void {
-    this.todayDate = new Date().toISOString();
-    this.getAttendanceToday();
     this.getAttendanceHistory();
   }
 
-  get attendanceStatus(): string {
-    if (!this.attendanceToday) return "You haven't checked in.";
-    if (!this.attendanceToday.check_out_time)
-      return "You haven't checked out yet.";
-    return 'You have completed attendance.';
+  previous() {
+    this.page = this.page - 1;
+    this.getAttendanceHistory({ page: this.page });
   }
 
-  checkIn() {
-    this.attendance.checkIn().subscribe({
-      next: (response) => {
-        this.attendanceToday = response.data ?? null;
-        this.notification.show(response.message, 'success', 3000);
-        this.getAttendanceHistory();
-      },
-      error: (err) => {
-        this.notification.show(err.error.errors, 'error', 5000);
-      },
-    });
+  next() {
+    this.page = this.page + 1;
+    this.getAttendanceHistory({ page: this.page });
   }
 
-  checkOut() {
-    this.attendance.checkOut().subscribe({
-      next: (response) => {
-        this.attendanceToday = response.data ?? null;
-        this.notification.show(response.message, 'success', 3000);
-        this.getAttendanceHistory();
-      },
-      error: (err) => {
-        this.notification.show(err.error.errors, 'error', 5000);
-      },
-    });
+  changePage(value: number) {
+    this.page = value;
+    this.getAttendanceHistory({ page: this.page });
   }
 }

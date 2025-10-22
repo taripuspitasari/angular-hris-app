@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -24,7 +24,12 @@ export class AttendanceService {
     return this.http.post<BaseApi<Attendance>>(`${this.baseUrl}/check-out`, {});
   }
 
-  getAttendanceHistory(): Observable<PaginatedApi<Attendance>> {
-    return this.http.get<PaginatedApi<Attendance>>(`${this.baseUrl}/history`);
+  getAttendanceHistory(params: any = {}): Observable<PaginatedApi<Attendance>> {
+    let httpParams = new HttpParams();
+    if (params.page) httpParams = httpParams.set('page', params.page);
+
+    return this.http.get<PaginatedApi<Attendance>>(`${this.baseUrl}/history`, {
+      params: httpParams,
+    });
   }
 }

@@ -9,10 +9,10 @@
     <table class="w-max min-w-full rounded-lg shadow-sm bg-white">
       <thead>
         <tr class="text-left text-gray-400">
-          <th class="pl-8 pr-4 py-2">#</th>
-          <th class="px-4 py-2">Date</th>
-          <th class="px-4 py-2">Check-in</th>
-          <th class="px-4 py-2">Check-out</th>
+          <th class="pl-8 pr-4 py-2">Date</th>
+          <th class="px-4 py-2">Day</th>
+          <th class="px-4 py-2">Check-In</th>
+          <th class="px-4 py-2">Check-Out</th>
           <th class="px-4 py-2">Status</th>
         </tr>
       </thead>
@@ -20,9 +20,11 @@
         @for(attendance of attendaceHistory; track attendance.id; let idx =
         $index){
         <tr class="border-y border-gray-200">
-          <td class="pl-8 pr-4 py-2">{{ idx + 1 }}</td>
+          <td class="pl-8 pr-4 py-2">
+            {{ attendance.date | date : "mediumDate" }}
+          </td>
           <td class="px-4 py-2">
-            {{ attendance.date | date : "fullDate" }}
+            {{ attendance.date | date : "EEEE" }}
           </td>
           <td class="px-4 py-2 text-nowrap">
             {{ attendance.check_in_time | date : "shortTime" }}
@@ -48,5 +50,50 @@
         }
       </tbody>
     </table>
+  </div>
+
+  <div class="flex justify-center">
+    <nav class="flex items-center space-x-3 bg-fuchsia-50 rounded-xl p-3">
+      <!--  previous-->
+      @if(page > 1) {
+      <a
+        (click)="previous()"
+        class="px-4 py-2 bg-white text-fuchsia-900 rounded-lg hover:bg-fuchsia-100 focus:outline-none focus:ring-1 focus:ring-fuchsia-300 transition-all duration-200 flex items-center"
+      >
+        <i class="fas fa-chevron-left mr-2"></i> Previous
+      </a>
+      }
+
+      <!-- for page -->
+      @for(value of getPages(); track value) {
+      <!-- if active -->
+      @if(value === page) {
+      <a
+        (click)="changePage(value)"
+        class="px-4 py-2 bg-fuchsia-600 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-1 focus:ring-fuchsia-300 transition-all duration-200 font-medium shadow-md"
+      >
+        {{ value }}
+      </a>
+      }
+      <!-- if nonactive -->
+      @else {
+      <a
+        (click)="changePage(value)"
+        class="px-4 py-2 bg-white text-fuchsia-900 rounded-lg hover:bg-fuchsia-100 focus:outline-none focus:ring-1 focus:ring-fuchsia-300 transition-all duration-200 flex items-center"
+      >
+        {{ value }}
+      </a>
+      } }
+
+      <!-- next  -->
+      @if(page < totalPage) {
+      <a
+        (click)="next()"
+        class="px-4 py-2 bg-white text-fuchsia-900 rounded-lg hover:bg-fuchsia-100 focus:outline-none focus:ring-1 focus:ring-fuchsia-300 transition-all duration-200 flex items-center"
+      >
+        Next <i class="fas fa-chevron-right ml-2"></i>
+      </a>
+      }
+    </nav>
   </div>
 </main>
