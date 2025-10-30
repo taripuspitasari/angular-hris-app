@@ -57,7 +57,7 @@ export class EmployeeComponent {
         this.totalPage = response.paging.total_page;
       },
       error: (err) => {
-        console.log(err.error.errors);
+        this.notification.show(err.error.errors, 'error', 3000);
       },
     });
   }

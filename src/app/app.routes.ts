@@ -10,8 +10,14 @@ import { DepartmentComponent } from './pages/department/department.component';
 import { UserComponent } from './pages/user/user.component';
 import { EmployeeComponent } from './pages/employee/employee.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LeaveComponent } from './pages/leave/leave.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
   {
     path: '',
     component: LayoutComponent,
@@ -59,6 +65,10 @@ export const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+      },
+      {
+        path: 'leaves',
+        component: LeaveComponent,
       },
     ],
   },
